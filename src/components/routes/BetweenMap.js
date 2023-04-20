@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { skyMapStyles } from '@/mapStyles'
+import { skyMapStyles } from '@/mapStyled'
 
 const mapOptions = {
     center: { lat: 19.931636041579534, lng: 3.7955652719844224 },

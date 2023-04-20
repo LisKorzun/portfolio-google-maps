@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
 import { useNearestContext } from '@/components/routes/NearestContext'
-import { skyMapStyles } from '@/mapStyles'
+import { skyMapStyles } from '@/mapStyled'
 import { smoothTransition } from '@/animations'
 
 const mapOptions = {
