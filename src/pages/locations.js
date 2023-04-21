@@ -41,7 +41,7 @@ export default function Locations() {
                             <MapMarkersByContinent continent={CONTINENTS.S_AMERICA} />
                         )}
                         {activeTab === LOCATIONS_TABS_IDS.EUROPE && (
-                            <MapMarkersByContinent continent={CONTINENTS.EUROPE} delay={70} />
+                            <MapMarkersByContinent continent={CONTINENTS.EUROPE} delay={50} />
                         )}
                         {activeTab === LOCATIONS_TABS_IDS.ASIA && <MapMarkersByContinent continent={CONTINENTS.ASIA} />}
                     </div>
@@ -70,8 +70,8 @@ export default function Locations() {
                 </motion.div>
 
                 {LOCATIONS_TABS.map(({ Component, title, id }, i) => (
-                    <div key={i} className="overflow-hidden px-8 text-primary-dark">
-                        <Accordion tabId={id} expanded={activeTab} setExpanded={setActiveTab} title={title}>
+                    <div key={i} className="overflow-hidden text-primary-dark">
+                        <Accordion tabId={id} expanded={activeTab} setExpanded={setActiveTab} title={title} bgColor="#209EBC">
                             <Component />
                         </Accordion>
                     </div>

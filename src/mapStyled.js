@@ -5,7 +5,7 @@ export const skyMapStyles = [
         elementType: 'geometry',
         stylers: [
             {
-                color: '#f5f5f5',
+                color: '#f1f5f9',
             },
         ],
     },
@@ -44,22 +44,10 @@ export const skyMapStyles = [
     },
     {
         featureType: 'administrative.country',
-        elementType: 'geometry.stroke',
-        stylers: [
-            {
-                color: '#209ebc',
-            },
-            {
-                weight: 0.5,
-            },
-        ],
-    },
-    {
-        featureType: 'administrative.land_parcel',
         elementType: 'labels.text.fill',
         stylers: [
             {
-                color: '#bdbdbd',
+                color: '#023047',
             },
         ],
     },
@@ -86,7 +74,7 @@ export const skyMapStyles = [
         elementType: 'geometry',
         stylers: [
             {
-                color: '#e5e5e5',
+                color: '#e2e8f0',
             },
         ],
     },
@@ -95,7 +83,7 @@ export const skyMapStyles = [
         elementType: 'labels.text.fill',
         stylers: [
             {
-                color: '#9e9e9e',
+                color: '#94a3b8',
             },
         ],
     },
@@ -109,20 +97,11 @@ export const skyMapStyles = [
         ],
     },
     {
-        featureType: 'road.arterial',
-        elementType: 'geometry',
-        stylers: [
-            {
-                color: '#8ecae6',
-            },
-        ],
-    },
-    {
-        featureType: 'road.arterial',
+        featureType: 'road',
         elementType: 'labels.text.fill',
         stylers: [
             {
-                color: '#757575',
+                color: '#334155',
             },
         ],
     },
@@ -131,7 +110,7 @@ export const skyMapStyles = [
         elementType: 'geometry',
         stylers: [
             {
-                color: '#209ebc',
+                color: '#e2e8f0',
             },
         ],
     },
@@ -140,22 +119,13 @@ export const skyMapStyles = [
         elementType: 'labels.text.fill',
         stylers: [
             {
-                color: '#616161',
-            },
-        ],
-    },
-    {
-        featureType: 'road.local',
-        elementType: 'labels.text.fill',
-        stylers: [
-            {
-                color: '#9e9e9e',
+                color: '#334155',
             },
         ],
     },
     {
         featureType: 'transit.line',
-        elementType: 'geometry',
+        elementType: 'labels.text.fill',
         stylers: [
             {
                 color: '#e5e5e5',
@@ -176,7 +146,7 @@ export const skyMapStyles = [
         elementType: 'geometry',
         stylers: [
             {
-                color: '#8ecae6',
+                color: '#209ebc',
             },
         ],
     },
@@ -307,18 +277,6 @@ export const darkMapStyles = [
     },
     {
         featureType: 'road.arterial',
-        elementType: 'geometry',
-        stylers: [
-            {
-                color: '#8ecae6',
-            },
-            {
-                weight: 0.5,
-            },
-        ],
-    },
-    {
-        featureType: 'road.arterial',
         elementType: 'labels.text.fill',
         stylers: [
             {
@@ -331,10 +289,7 @@ export const darkMapStyles = [
         elementType: 'geometry',
         stylers: [
             {
-                color: '#8ecae6',
-            },
-            {
-                weight: 0.5,
+                color: '#dadada',
             },
         ],
     },
@@ -385,13 +340,19 @@ export const darkMapStyles = [
     },
     {
         featureType: 'water',
+        elementType: 'labels',
+        stylers: [
+            {
+                visibility: 'off',
+            },
+        ],
+    },
+    {
+        featureType: 'water',
         elementType: 'labels.text.fill',
         stylers: [
             {
                 color: '#9e9e9e',
-            },
-            {
-                visibility: 'off',
             },
         ],
     },

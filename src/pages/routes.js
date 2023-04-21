@@ -8,7 +8,6 @@ import Accordion from '@/components/Accordion'
 import { BetweenMap, NearestMap, NearestProvider } from '@/components/routes'
 import { ROUTES_TABS, ROUTES_TABS_IDS } from '@/components/routes/constants'
 import { smoothTransition } from '@/animations'
-import { MotionImage } from '@/components/common'
 
 const options = {
     libraries: ['places'],
@@ -22,6 +21,18 @@ export default function Routes() {
         <NearestProvider>
             <div className="w-full md:w-2/3 h-[70vh] md:h-auto mr-4 relative">
                 <Wrapper {...options}>
+                    <motion.div
+                        key="default"
+                        className="w-full h-full"
+                        initial={{ opacity: 0, height: '100%' }}
+                        animate={{
+                            opacity: isEmpty(activeTab) ? 1 : 0.7,
+                            height: isEmpty(activeTab) ? '100%' : 0,
+                        }}
+                        transition={{ ...smoothTransition, delay: 0.1 }}
+                    >
+                        <BetweenMap />
+                    </motion.div>
                     <motion.div
                         key={ROUTES_TABS_IDS.NEAREST}
                         className="w-full h-full flex"
@@ -47,18 +58,6 @@ export default function Routes() {
                         <BetweenMap />
                     </motion.div>
                 </Wrapper>
-                <div className="absolute top-0 right-0 bg-primary-dark z-back w-full h-full ">
-                    <MotionImage
-                        src="/continents.png"
-                        alt="continents"
-                        width={1000}
-                        height={1000}
-                        priority
-                        className=" w-full h-auto z-img"
-                        animate={{ opacity: isEmpty(activeTab) ? 1 : 0 }}
-                        transition={{ ...smoothTransition, delay: 0.2 }}
-                    />
-                </div>
             </div>
             <div className="w-full md:w-1/3 h-auto pb-8">
                 <motion.div
@@ -83,8 +82,8 @@ export default function Routes() {
                 </motion.div>
 
                 {ROUTES_TABS.map(({ Component, title, id }, i) => (
-                    <div key={i} className="overflow-hidden px-8 text-primary-dark">
-                        <Accordion tabId={id} expanded={activeTab} setExpanded={setActiveTab} title={title}>
+                    <div key={i} className="overflow-hidden text-primary-dark">
+                        <Accordion tabId={id} expanded={activeTab} setExpanded={setActiveTab} title={title} bgColor="#023047">
                             <Component />
                         </Accordion>
                     </div>

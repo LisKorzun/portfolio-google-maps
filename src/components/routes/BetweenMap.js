@@ -21,5 +21,5 @@ export const BetweenMap = () => {
         setBounds(new window.google.maps.LatLngBounds())
     }, [])
 
-    return <motion.div ref={mapRef} id="map" className="w-full h-full" />
+    return <motion.div ref={mapRef} className="w-full h-full" />
 }

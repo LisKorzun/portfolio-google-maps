@@ -3,53 +3,63 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
+    --foreground-rgb: 0, 0, 0;
+    --background-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-rgb: 255, 255, 255;
-  }
+    :root {
+        --foreground-rgb: 0, 0, 0;
+        --background-rgb: 255, 255, 255;
+    }
 }
 
-html{
-  font-size: 16px;
+html {
+    font-size: 16px;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background-color: rgb(var(--background-rgb));
+    color: rgb(var(--foreground-rgb));
+    background-color: rgb(var(--background-rgb));
 }
 
 /* Google Styles Overrides */
 .adp .adp-placemark {
-  margin: 0;
-  background-color: #023047;
-  color: #fff;
-  border: none;
-  font-weight: 500;
+    margin: 0;
+    background-color: #023047;
+    color: #fff;
+    border: none;
+    font-weight: 500;
 }
+
 .adp .adp-placemark .adp-text {
-  padding-left: 4px;
+    padding-left: 4px;
 }
+
 .adp .adp-summary {
-  padding: 10px 4px;
-  color: #023047;
-  font-weight: 500;
+    padding: 10px 4px;
+    color: #023047;
+    font-weight: 500;
 }
+
+.adp .adp-directions {
+    color: #334155;
+}
+
 .adp .adp-legal {
-  display: none;
+    display: none;
 }
+
 .adp .adp-warnbox {
-  margin: 0;
+    margin: 0;
 }
+
 .adp .adp-warnbox .warnbox-content {
-  background-color: #76E5CF;
-  color: #023047;
-  font-size: 12px;
+    background-color: #76E5CF;
+    color: #023047;
+    font-size: 12px;
 }
+
 .adp .adp-warnbox .warnbox-c1, .adp .adp-warnbox .warnbox-c2 {
-  display: none;
+    display: none;
 }

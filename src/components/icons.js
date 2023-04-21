@@ -72,3 +72,75 @@ export const CaretDownIcon = (props) => {
         </motion.svg>
     )
 }
+export const CompressIcon = (props) => {
+    return (
+        <motion.svg
+            viewBox="0 0 448 512"
+            focusable="false"
+            role="img"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            {...props}
+        >
+            <title>Compress icon</title>
+            <path
+                fill="currentColor"
+                d="M128 320H32c-17.69 0-32 14.31-32 32s14.31 32 32 32h64v64c0 17.69 14.31 32 32 32s32-14.31 32-32v-96c0-17.7-14.3-32-32-32zm288 0h-96c-17.69 0-32 14.31-32 32v96c0 17.69 14.31 32 32 32s32-14.31 32-32v-64h64c17.69 0 32-14.31 32-32s-14.3-32-32-32zm-96-128h96c17.69 0 32-14.31 32-32s-14.31-32-32-32h-64V64c0-17.69-14.31-32-32-32s-32 14.31-32 32v96c0 17.7 14.3 32 32 32zM128 32c-17.7 0-32 14.31-32 32v64H32c-17.69 0-32 14.3-32 32s14.31 32 32 32h96c17.69 0 32-14.31 32-32V64c0-17.69-14.3-32-32-32z"
+            ></path>
+        </motion.svg>
+    )
+}
+export const ExpandIcon = (props) => {
+    return (
+        <motion.svg
+            viewBox="0 0 448 512"
+            focusable="false"
+            role="img"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            {...props}
+        >
+            <title>Expand icon</title>
+            <path
+                fill="currentColor"
+                d="M128 32H32C14.31 32 0 46.31 0 64v96c0 17.69 14.31 32 32 32s32-14.31 32-32V96h64c17.69 0 32-14.31 32-32s-14.3-32-32-32zm288 0h-96c-17.69 0-32 14.31-32 32s14.31 32 32 32h64v64c0 17.69 14.31 32 32 32s32-14.31 32-32V64c0-17.69-14.3-32-32-32zM128 416H64v-64c0-17.69-14.31-32-32-32S0 334.31 0 352v96c0 17.69 14.31 32 32 32h96c17.69 0 32-14.31 32-32s-14.3-32-32-32zm288-96c-17.69 0-32 14.31-32 32v64h-64c-17.69 0-32 14.31-32 32s14.31 32 32 32h96c17.69 0 32-14.31 32-32v-96c0-17.7-14.3-32-32-32z"
+            ></path>
+        </motion.svg>
+    )
+}
+export const CloseIcon = (props) => {
+    return (
+        <motion.svg
+            viewBox="0 0 24 24"
+            focusable="false"
+            role="img"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            {...props}
+        >
+            <title>Close icon</title>
+            <g data-name="Layer 2">
+                <path
+                    d="m13.41 12 4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29-4.3 4.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4.29-4.3 4.29 4.3a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42z"
+                    data-name="close"
+                ></path>
+            </g>
+        </motion.svg>
+    )
+}
+export const FocusIcon = (props) => {
+    return (
+        <motion.svg
+            viewBox="0 0 24 24"
+            focusable="false"
+            role="img"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            {...props}
+        >
+            <title>FilterCenterFocus icon</title>
+            <rect width="24" height="24" fill="none"></rect>
+            <path d="M4 15c-.55 0-1 .45-1 1v3c0 1.1.9 2 2 2h3c.55 0 1-.45 1-1s-.45-1-1-1H5v-3c0-.55-.45-1-1-1zM5 5h3c.55 0 1-.45 1-1s-.45-1-1-1H5c-1.1 0-2 .9-2 2v3c0 .55.45 1 1 1s1-.45 1-1V5zm14-2h-3c-.55 0-1 .45-1 1s.45 1 1 1h3v3c0 .55.45 1 1 1s1-.45 1-1V5c0-1.1-.9-2-2-2zm0 16h-3c-.55 0-1 .45-1 1s.45 1 1 1h3c1.1 0 2-.9 2-2v-3c0-.55-.45-1-1-1s-1 .45-1 1v3zM12 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path>
+        </motion.svg>
+    )
+}

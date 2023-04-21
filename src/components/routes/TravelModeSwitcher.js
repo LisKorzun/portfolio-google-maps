@@ -51,7 +51,7 @@ export const TravelModeSwitcher = () => {
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ ...smoothTransition, delay: 0.1 }}
                     >
-                        <div className="text-left py-2 px-4 border border-slate-200 text-primary-dark">
+                        <div className="text-left py-2 px-4 border border-slate-200 text-primary-dark bg-white">
                             <div className="font-medium">{currentRoute.duration}</div>
                             <div>{currentRoute.distance}</div>
                         </div>
@@ -76,7 +76,7 @@ export const TravelModeSwitcher = () => {
             </div>
             <motion.div
                 key={travelMode}
-                className="flex gap-2 w-full justify-start text-slate-600 overflow-x-scroll overflow-y-auto h-fit mt-6"
+                className="flex gap-2 w-full justify-start text-slate-700 overflow-x-scroll overflow-y-auto h-fit mt-6"
                 initial={{ y: 100 }}
                 animate={{ y: 0 }}
                 transition={{ ...smoothTransition, delay: 0.4 }}
@@ -87,7 +87,7 @@ export const TravelModeSwitcher = () => {
                     return (
                         <motion.div
                             key={route.mode}
-                            className="flex gap-2 p-2 border border-slate-200 items-center cursor-pointer min-w-fit min-h-fit"
+                            className="flex gap-2 py-2 px-4 border border-slate-200 items-center cursor-pointer min-w-fit min-h-fit"
                             whileHover={{ scale: 1.08, backgroundColor: '#e2e8f0' }}
                             initial={{ backgroundColor: '#fff' }}
                             transition={smoothTransition}

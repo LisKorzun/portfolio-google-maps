@@ -8,7 +8,7 @@ export const NearestTab = ({}) => {
     const { status, error, buildRoute } = useNearestContext()
 
     return (
-        <div className="py-6 px-6 text-slate-600 bg-slate-50 border-b border-slate-100 text-sm flex flex-col justify-center items-center text-center h-auto md:h-[405px] overflow-hidden">
+        <div className="py-6 px-6 text-slate-600 text-sm flex flex-col justify-center items-center text-center h-full">
             {status === STATUS.INITIAL && <p className="mb-6">We will find an easy way to get to us.</p>}
             {status === STATUS.ERROR && (
                 <>
