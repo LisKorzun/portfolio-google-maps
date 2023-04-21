@@ -60,9 +60,9 @@ export default function Routes() {
                     />
                 </div>
             </div>
-            <div className="w-full md:w-1/3 h-auto bg-primary-light pb-8">
+            <div className="w-full md:w-1/3 h-auto pb-8">
                 <motion.div
-                    className="px-8 pt-14 pb-6 flex items-center relative"
+                    className="px-8 pt-16 pb-6 flex items-center bg-primary-light relative"
                     initial={{ x: 300, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{
@@ -72,14 +72,14 @@ export default function Routes() {
                     }}
                 >
                     <Image
-                        src="/way-finder-white.png"
+                        src="/way-finder-primary-dark.png"
                         alt="way-finder"
                         width={47.3}
                         height={36}
                         priority
-                        className="absolute top-0 left-7 w-auto h-auto"
+                        className="absolute top-0 left-7 w-auto h-auto opacity-50"
                     />
-                    <h3 className="font-black text-white text-4xl">Routes</h3>
+                    <h3 className="font-black text-primary-dark text-4xl">Routes</h3>
                 </motion.div>
 
                 {ROUTES_TABS.map(({ Component, title, id }, i) => (

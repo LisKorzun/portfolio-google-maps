@@ -6,7 +6,6 @@ export function getRelevantOffice(placesService, location, query = 'exadel') {
     return new Promise((resolve, reject) => {
         const queryCallback = (results, status) => {
             if (status === window.google.maps.places.PlacesServiceStatus.OK && results.length) {
-                console.log(results, results[0].geometry.location.lat(), results[0].geometry.location.lng())
                 resolve({ destination: results[0].geometry.location })
             } else {
                 reject(new Error(ERRORS_MSG.NEARBY))
@@ -29,11 +28,9 @@ export function calculateRoute(directionsService, origin, destination, mode = 'D
             })
     })
 }
-// {lat: 53.8797499, lng: 27.4766713} {lat: 40.02619695064507, lng: -105.22340111215398}
 
 export function getAvailableRoutesByModes(directionsService, origin, destination) {
     return new Promise((resolve, reject) => {
-        console.log(origin, destination)
         const requests = []
         const routes = {}
         map(MODES, (mode) => {
@@ -43,7 +40,11 @@ export function getAvailableRoutesByModes(directionsService, origin, destination
             .then((responses) => {
                 map(MODES, (mode, i) => {
                     const response = responses[i]
-                    if (response.status === 'fulfilled') {
+                    if (
+                        response.status === 'fulfilled' &&
+                        response.value?.routes.length &&
+                        response.value.routes[0]?.legs.length
+                    ) {
                         routes[mode] = {
                             mode: mode,
                             response: response.value,
