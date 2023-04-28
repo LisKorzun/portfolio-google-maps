@@ -17,7 +17,7 @@ export default function App({ Component, pageProps, router }) {
                     font-family: ${dmSans.style.fontFamily};
                 }
             `}</style>
-            <AnimatePresence mode="wait" initial={true}>
+            <AnimatePresence mode="wait" initial={true} onExitComplete={() => window.scrollTo(0, 0)}>
                 <Layout key={page}>
                     <Component {...pageProps} />
                 </Layout>

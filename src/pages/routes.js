@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 import Accordion from '@/components/Accordion'
-import { BetweenMap, NearestMap, NearestProvider } from '@/components/routes'
+import { BetweenMap, DefaultMap, NearestMap, NearestProvider } from '@/components/routes'
 import { ROUTES_TABS, ROUTES_TABS_IDS } from '@/components/routes/constants'
 import { smoothTransition } from '@/animations'
 
@@ -31,7 +31,7 @@ export default function Routes() {
                         }}
                         transition={{ ...smoothTransition, delay: 0.1 }}
                     >
-                        <BetweenMap />
+                        <DefaultMap />
                     </motion.div>
                     <motion.div
                         key={ROUTES_TABS_IDS.NEAREST}

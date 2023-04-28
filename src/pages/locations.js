@@ -24,7 +24,7 @@ export default function Locations() {
 
     return (
         <LocationsProvider>
-            <div className="w-full md:w-2/3 h-[70vh] md:h-auto mr-4 relative">
+            <div className="w-full md:w-2/3 h-[70vh] md:h-auto mr-4 bg-primary-dark">
                 <GoogleMapsProvider
                     googleMapsAPIKey={process.env.NEXT_PUBLIC_MAPS_API_KEY}
                     mapContainer={mapContainer}

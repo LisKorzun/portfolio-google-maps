@@ -21,5 +21,18 @@ export const BetweenMap = () => {
         setBounds(new window.google.maps.LatLngBounds())
     }, [])
 
-    return <motion.div ref={mapRef} className="w-full h-full" />
+    return <motion.div ref={mapRef} id="between-map" className="w-full h-full" />
+}
+
+export const DefaultMap = () => {
+    const mapRef = useRef()
+    const [map, setMap] = useState()
+    const [bounds, setBounds] = useState()
+
+    useEffect(() => {
+        setMap(new window.google.maps.Map(mapRef.current, mapOptions))
+        setBounds(new window.google.maps.LatLngBounds())
+    }, [])
+
+    return <motion.div ref={mapRef} id="default-map" className="w-full h-full" />
 }

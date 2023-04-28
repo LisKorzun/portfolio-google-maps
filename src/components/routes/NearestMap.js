@@ -25,7 +25,7 @@ export const NearestMap = () => {
 
     return (
         <>
-            <motion.div ref={mapRef} id="map" className="h-full grow" />
+            <motion.div ref={mapRef} id="nearest-map" className="h-full grow" />
             <motion.div
                 ref={mapSideBarRef}
                 className="h-full overflow-auto bg-white text-[13px]"

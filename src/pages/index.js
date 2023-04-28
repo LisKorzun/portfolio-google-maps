@@ -1,17 +1,21 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { MotionImage } from '@/components/common'
 
 export default function Home() {
     return (
         <>
             <div className="w-full md:w-1/2 lg:w-2/3 h-[50vh] bg-primary-dark overflow-hidden relative md:h-[70vh] md:mr-4">
-                <Image
+                <MotionImage
                     src="/continents.png"
                     alt="Logo"
                     width={1002}
                     height={1002}
                     priority
                     className="absolute top-0 right-0 w-full h-auto "
+                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    transition={{ type: 'linear', delay: 0.2, duration: 1.5 }}
                 />
             </div>
 
