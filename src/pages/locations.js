@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { GoogleMapsProvider } from '@ubilabs/google-maps-react-hooks'
 
 import { ContinentsMapMarkers, LocationsProvider } from '@/components/locations'
-import { motion } from 'framer-motion'
 import Accordion from '@/components/Accordion'
 import { DEFAULT_MAP_OPTIONS, LOCATIONS_TABS, LOCATIONS_TABS_IDS } from '@/components/locations/constants'
 import { MapMarkersByContinent } from '@/components/locations/MapMarkersByContinent'
@@ -50,16 +49,7 @@ export default function Locations() {
                     </GoogleMapsProvider>
                 </div>
                 <div className="w-full md:w-1/3 h-auto pb-8">
-                    <motion.div
-                        className="w-full px-8 pt-16 pb-6 flex items-center relative bg-primary-dark"
-                        // initial={{ x: 30, opacity: 0 }}
-                        // animate={{ x: 0, opacity: 1 }}
-                        // transition={{
-                        //     type: 'spring',
-                        //     stiffness: 250,
-                        //     damping: 18,
-                        // }}
-                    >
+                    <div className="w-full px-8 pt-16 pb-6 flex items-center relative bg-primary-dark">
                         <Image
                             src="/way-finder-primary-light.png"
                             alt="way-finder"
@@ -69,7 +59,7 @@ export default function Locations() {
                             className="absolute top-0 left-7 w-auto h-auto opacity-50"
                         />
                         <h3 className="font-black text-white text-4xl">Locations</h3>
-                    </motion.div>
+                    </div>
 
                     {LOCATIONS_TABS.map(({ Component, title, id }, i) => (
                         <div key={i} className="overflow-hidden text-primary-dark">

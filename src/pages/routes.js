@@ -62,16 +62,7 @@ export default function Routes() {
                     </Wrapper>
                 </div>
                 <div className="w-full md:w-1/3 h-auto pb-8">
-                    <motion.div
-                        className="px-8 pt-16 pb-6 flex items-center bg-primary-light relative"
-                        initial={{ x: 300, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{
-                            type: 'spring',
-                            stiffness: 250,
-                            damping: 18,
-                        }}
-                    >
+                    <div className="px-8 pt-16 pb-6 flex items-center bg-primary-light relative">
                         <Image
                             src="/way-finder-primary-dark.png"
                             alt="way-finder"
@@ -81,7 +72,7 @@ export default function Routes() {
                             className="absolute top-0 left-7 w-auto h-auto opacity-50"
                         />
                         <h3 className="font-black text-primary-dark text-4xl">Routes</h3>
-                    </motion.div>
+                    </div>
 
                     {ROUTES_TABS.map(({ Component, title, id }, i) => (
                         <div key={i} className="overflow-hidden text-primary-dark">
