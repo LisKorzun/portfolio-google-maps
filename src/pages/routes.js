@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { isEmpty } from 'lodash'
-import { Wrapper } from '@googlemaps/react-wrapper'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
@@ -8,21 +7,16 @@ import Accordion from '@/components/Accordion'
 import { BetweenMap, DefaultMap, NearestMap, NearestProvider } from '@/components/routes'
 import { ROUTES_TABS, ROUTES_TABS_IDS } from '@/components/routes/constants'
 import { smoothTransition } from '@/animations'
-import Layout from '@/components/Layout'
-
-const options = {
-    libraries: ['places'],
-    apiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY,
-}
+import { ContentWrapper, MapLoadWrapper } from '@/components/wrappers'
 
 export default function Routes() {
     const [activeTab, setActiveTab] = useState('')
 
     return (
-        <Layout>
+        <ContentWrapper>
             <NearestProvider>
                 <div className="w-full md:w-2/3 h-[70vh] md:h-auto mr-4 relative">
-                    <Wrapper {...options}>
+                    <MapLoadWrapper>
                         <motion.div
                             key="default"
                             className="w-full h-full"
@@ -59,7 +53,7 @@ export default function Routes() {
                         >
                             <BetweenMap />
                         </motion.div>
-                    </Wrapper>
+                    </MapLoadWrapper>
                 </div>
                 <div className="w-full md:w-1/3 h-auto pb-8">
                     <div className="px-8 pt-16 pb-6 flex items-center bg-primary-light relative">
@@ -83,6 +77,6 @@ export default function Routes() {
                     ))}
                 </div>
             </NearestProvider>
-        </Layout>
+        </ContentWrapper>
     )
 }

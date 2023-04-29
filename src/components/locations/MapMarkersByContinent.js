@@ -1,12 +1,12 @@
 import { useLayoutEffect } from 'react'
-import { useGoogleMap } from '@ubilabs/google-maps-react-hooks'
 import { templateComplexInfo } from '@/components/templates'
 import { LOGO_IMAGE as logo, MARKER_IMAGE } from '@/constants'
 import { DEFAULT_CENTER, DEFAULT_MAP_OPTIONS, DEFAULT_ZOOM, mapsOptions } from '@/components/locations/constants'
 import { markersByContinent } from '@/data'
+import { useLocationsMap } from '@/components/locations/LocationsContext'
 
 export const MapMarkersByContinent = ({ continent, delay = 200 }) => {
-    const map = useGoogleMap()
+    const { map } = useLocationsMap()
 
     const mapOptions = mapsOptions[continent]
     const markers = markersByContinent[continent]

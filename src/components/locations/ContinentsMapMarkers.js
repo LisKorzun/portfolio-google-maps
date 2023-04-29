@@ -6,11 +6,12 @@ import { mapValues } from 'lodash'
 import { templateComplexInfo } from '@/components/templates'
 import { LOGO_IMAGE as logo, MARKER_IMAGE } from '@/constants'
 import { DEFAULT_CENTER, DEFAULT_MAP_OPTIONS, DEFAULT_ZOOM } from '@/components/locations/constants'
+import { useLocationsMap } from '@/components/locations/LocationsContext'
 
 const zoom = 2.25
 
 export const ContinentsMapMarkers = () => {
-    const map = useGoogleMap()
+    const { map } = useLocationsMap()
 
     useLayoutEffect(() => {
         if (!map) {

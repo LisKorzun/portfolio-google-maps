@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { MotionImage } from '@/components/common'
-import Layout from '@/components/Layout'
+import { ContentWrapper } from '@/components/wrappers'
 
 export default function Home() {
     return (
-        <Layout>
+        <ContentWrapper>
             <div className="w-full md:w-1/2 lg:w-2/3 h-[50vh] bg-primary-dark overflow-hidden relative md:h-[70vh] md:mr-4">
                 <MotionImage
                     src="/continents.png"
@@ -52,6 +52,6 @@ export default function Home() {
                     <p className=" text-white text-xl pt-3 sm:text-sm xl:text-xl">There are lots of ways to reach us</p>
                 </Link>
             </div>
-        </Layout>
+        </ContentWrapper>
     )
 }

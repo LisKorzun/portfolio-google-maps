@@ -1,39 +1,22 @@
-import { useCallback, useRef, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
-import { GoogleMapsProvider } from '@ubilabs/google-maps-react-hooks'
 
-import { ContinentsMapMarkers, LocationsProvider } from '@/components/locations'
+import { ContinentsMapMarkers, LocationsMap, LocationsProvider, MapMarkersByContinent } from '@/components/locations'
+import { ContentWrapper, MapLoadWrapper } from '@/components/wrappers'
 import Accordion from '@/components/Accordion'
-import { DEFAULT_MAP_OPTIONS, LOCATIONS_TABS, LOCATIONS_TABS_IDS } from '@/components/locations/constants'
-import { MapMarkersByContinent } from '@/components/locations/MapMarkersByContinent'
+import { LOCATIONS_TABS, LOCATIONS_TABS_IDS } from '@/components/locations/constants'
 import { CONTINENTS } from '@/constants'
-import Layout from '@/components/Layout'
 
 export default function Locations() {
     const [activeTab, setActiveTab] = useState('')
-    const [mapContainer, setMapContainer] = useState(null)
-    const isLoaded = useRef(false)
-
-    const mapRef = useCallback((node) => {
-        node && setMapContainer(node)
-    }, [])
-
-    const onLoad = () => {
-        isLoaded.current = true
-    }
 
     return (
-        <Layout>
+        <ContentWrapper>
             <LocationsProvider>
                 <div className="w-full md:w-2/3 h-[70vh] md:h-auto mr-4 bg-primary-dark">
-                    <GoogleMapsProvider
-                        googleMapsAPIKey={process.env.NEXT_PUBLIC_MAPS_API_KEY}
-                        mapContainer={mapContainer}
-                        mapOptions={DEFAULT_MAP_OPTIONS}
-                        onLoadMap={onLoad}
-                    >
+                    <MapLoadWrapper>
                         <div className="w-full h-full">
-                            <div ref={mapRef} style={{ height: '100%' }} />
+                            <LocationsMap />
                             {activeTab === LOCATIONS_TABS_IDS.CONTINENTS && <ContinentsMapMarkers />}
                             {activeTab === LOCATIONS_TABS_IDS.NORTH_AMERICA && (
                                 <MapMarkersByContinent continent={CONTINENTS.N_AMERICA} />
@@ -46,7 +29,7 @@ export default function Locations() {
                             )}
                             {activeTab === LOCATIONS_TABS_IDS.ASIA && <MapMarkersByContinent continent={CONTINENTS.ASIA} />}
                         </div>
-                    </GoogleMapsProvider>
+                    </MapLoadWrapper>
                 </div>
                 <div className="w-full md:w-1/3 h-auto pb-8">
                     <div className="w-full px-8 pt-16 pb-6 flex items-center relative bg-primary-dark">
@@ -70,6 +53,6 @@ export default function Locations() {
                     ))}
                 </div>
             </LocationsProvider>
-        </Layout>
+        </ContentWrapper>
     )
 }
