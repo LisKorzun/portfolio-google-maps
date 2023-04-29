@@ -9,7 +9,7 @@ export const LocationsMap = () => {
 
     useEffect(() => {
         setMap(new window.google.maps.Map(mapRef.current, DEFAULT_MAP_OPTIONS))
-    }, [])
+    }, [setMap])
 
     return <motion.div ref={mapRef} id="locations-map" className="w-full h-full" />
 }

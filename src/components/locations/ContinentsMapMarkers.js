@@ -1,5 +1,4 @@
 import { useLayoutEffect } from 'react'
-import { useGoogleMap } from '@ubilabs/google-maps-react-hooks'
 import { MarkerClusterer, SuperClusterAlgorithm } from '@googlemaps/markerclusterer'
 import { markersByContinent } from '@/data'
 import { mapValues } from 'lodash'
