@@ -1,19 +1,21 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import { smoothTransition } from '@/animations'
+import { markersByContinent } from '@/data'
+import { groupBy, isEmpty, keys, map } from 'lodash'
+import { useState } from 'react'
+import Accordion from '@/components/Accordion'
 import { CloseIcon, FocusIcon } from '@/components/icons'
-import { isEmpty } from 'lodash'
+import { smoothTransition } from '@/animations'
+import { AnimatePresence, motion } from 'framer-motion'
 
-export default function Accordion({ tabId, expanded, setExpanded, title, subtitle, bgColor, children }) {
+const CountryAccordion = ({ tabId, expanded, setExpanded, title, bgColor, children }) => {
     const isOpen = tabId === expanded
-
     return (
         <>
             <motion.div
                 initial={{ height: 'auto', backgroundColor: '#fff', color: '#023047' }}
                 animate={{
                     height: isOpen || isEmpty(expanded) ? 'auto' : 0,
-                    backgroundColor: isOpen ? bgColor : '#fff',
-                    color: isOpen ? '#fff' : '#023047',
+                    backgroundColor: isOpen ? bgColor : '#f1f5f9',
+                    color: isOpen ? '#f1f5f9' : '#023047',
                 }}
                 transition={{
                     backgroundColor: { duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] },
@@ -23,13 +25,10 @@ export default function Accordion({ tabId, expanded, setExpanded, title, subtitl
                 className={`${isOpen && 'text-primary-light'}`}
             >
                 <header
-                    className="text-lg font-medium px-8  py-6 border-inherit cursor-pointer flex justify-between"
+                    className="text-base font-medium py-4 border-inherit cursor-pointer flex justify-between items-center"
                     onClick={() => setExpanded(isOpen ? '' : tabId)}
                 >
-                    <div className="leading-none">
-                        {title}
-                        {subtitle ?? <div className="text-sm"> {subtitle}</div>}
-                    </div>
+                    {title}
                     {(!isOpen || isEmpty(expanded)) && (
                         <FocusIcon
                             key="focus"
@@ -69,5 +68,25 @@ export default function Accordion({ tabId, expanded, setExpanded, title, subtitl
                 )}
             </AnimatePresence>
         </>
+    )
+}
+
+export const TabByContinent = ({ continent }) => {
+    const [activeTab, setActiveTab] = useState('')
+    const officesByCountry = groupBy(markersByContinent[continent], ({ country }) => country)
+    const countries = keys(officesByCountry)
+    console.log(officesByCountry, countries)
+    return (
+        <div className="text-slate-600 text-sm flex flex-col h-full">
+            {/*<div className="self-end">{countries.length} countries</div>*/}
+            {map(countries, (country, i) => (
+                <div key={i} className="overflow-hidden text-primary-dark">
+                    <Accordion tabId={country} expanded={activeTab} setExpanded={setActiveTab} title={country} bgColor="#cbd5e1">
+                        <div>{country}</div>
+                        <div>{officesByCountry[country].length} offices</div>
+                    </Accordion>
+                </div>
+            ))}
+        </div>
     )
 }

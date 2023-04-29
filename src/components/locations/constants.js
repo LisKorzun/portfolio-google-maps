@@ -1,4 +1,5 @@
 import { BetweenTab } from '@/components/routes'
+import { TabByContinent } from '@/components/locations'
 import { CONTINENTS } from '@/constants'
 import { darkMapStyles } from '@/mapStyled'
 
@@ -18,23 +19,27 @@ export const LOCATIONS_TABS = [
     },
     {
         id: LOCATIONS_TABS_IDS.NORTH_AMERICA,
+        continent: CONTINENTS.N_AMERICA,
         title: 'Explore North America',
-        Component: BetweenTab,
+        Component: (props) => <TabByContinent {...props} />,
     },
     {
         id: LOCATIONS_TABS_IDS.SOUTH_AMERICA,
+        continent: CONTINENTS.S_AMERICA,
         title: 'Explore South America',
-        Component: BetweenTab,
+        Component: (props) => <TabByContinent {...props} />,
     },
     {
         id: LOCATIONS_TABS_IDS.EUROPE,
+        continent: CONTINENTS.EUROPE,
         title: 'Explore Europe',
-        Component: BetweenTab,
+        Component: (props) => <TabByContinent {...props} />,
     },
     {
         id: LOCATIONS_TABS_IDS.ASIA,
+        continent: CONTINENTS.ASIA,
         title: 'Explore Asia',
-        Component: BetweenTab,
+        Component: (props) => <TabByContinent {...props} />,
     },
 ]
 

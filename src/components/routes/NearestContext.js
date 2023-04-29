@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useCallback, useContext, useState } from 'react'
 
 import { getUserLocation } from '@/utils'
 import { getAvailableRoutesByModes, getRelevantOffice } from '@/map'
@@ -39,7 +39,7 @@ export const NearestProvider = ({ children }) => {
         }
     }
 
-    const initMap = (ref, options, sideBarRef) => {
+    const initMap = useCallback((ref, options, sideBarRef) => {
         const mapInstance = new window.google.maps.Map(ref, options)
         const directionsRendererInstance = new window.google.maps.DirectionsRenderer()
         directionsRendererInstance.setMap(mapInstance)
@@ -54,7 +54,7 @@ export const NearestProvider = ({ children }) => {
         setDirectionsRenderer(directionsRendererInstance)
         setPlacesService(new window.google.maps.places.PlacesService(mapInstance))
         setDirectionsService(new window.google.maps.DirectionsService())
-    }
+    }, [])
 
     const changeTravelMode = async (mode) => {
         try {

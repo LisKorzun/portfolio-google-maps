@@ -44,10 +44,17 @@ export default function Locations() {
                         <h3 className="font-black text-white text-4xl">Locations</h3>
                     </div>
 
-                    {LOCATIONS_TABS.map(({ Component, title, id }, i) => (
+                    {LOCATIONS_TABS.map(({ Component, Header, title, id, continent }, i) => (
                         <div key={i} className="overflow-hidden text-primary-dark">
-                            <Accordion tabId={id} expanded={activeTab} setExpanded={setActiveTab} title={title} bgColor="#209EBC">
-                                <Component />
+                            <Accordion
+                                tabId={id}
+                                Header={Header}
+                                expanded={activeTab}
+                                setExpanded={setActiveTab}
+                                title={title}
+                                bgColor="#209EBC"
+                            >
+                                <Component continent={continent} />
                             </Accordion>
                         </div>
                     ))}

@@ -55,7 +55,7 @@ export const MapMarkersByContinent = ({ continent, delay = 200 }) => {
             map.setCenter(DEFAULT_CENTER)
             mapMarkers.forEach((marker) => marker.setMap(null))
         }
-    }, [map, delay])
+    }, [map, delay, markers, mapOptions.zoom])
 
     return null
 }
