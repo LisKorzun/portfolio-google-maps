@@ -21,7 +21,7 @@ export const NearestMap = () => {
 
     useEffect(() => {
         initMap(mapRef.current, mapOptions, mapSideBarRef.current)
-    }, [initMap])
+    }, [])
 
     return (
         <>
