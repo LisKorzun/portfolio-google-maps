@@ -2,14 +2,14 @@ import { useLayoutEffect } from 'react'
 import { templateComplexInfo } from '@/components/templates'
 import { LOGO_IMAGE as logo, MARKER_IMAGE } from '@/constants'
 import { DEFAULT_CENTER, DEFAULT_MAP_OPTIONS, DEFAULT_ZOOM, mapsOptions } from '@/components/locations/constants'
-import { markersByContinent } from '@/data'
+import { markersByContinent, officesByArea } from '@/data'
 import { useLocationsMap } from '@/components/locations/LocationsContext'
 
-export const MapMarkersByContinent = ({ continent, delay = 200 }) => {
+export const MapMarkersByContinent = ({ area, delay = 100 }) => {
     const { map } = useLocationsMap()
 
-    const mapOptions = mapsOptions[continent]
-    const markers = markersByContinent[continent]
+    const mapOptions = mapsOptions[area]
+    const markers = officesByArea[area]
 
     useLayoutEffect(() => {
         if (!map) {

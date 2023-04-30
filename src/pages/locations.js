@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import Image from 'next/image'
 
-import { ContinentsMapMarkers, LocationsMap, LocationsProvider, MapMarkersByContinent } from '@/components/locations'
+import { ContinentsMapMarkers, LocationsMap, LocationsProvider } from '@/components/locations'
 import { ContentWrapper, MapLoadWrapper } from '@/components/wrappers'
 import Accordion from '@/components/Accordion'
-import { LOCATIONS_TABS, LOCATIONS_TABS_IDS } from '@/components/locations/constants'
-import { CONTINENTS } from '@/constants'
+import { LOCATIONS_TABS } from '@/components/locations/constants'
+import { AREAS } from '@/constants'
 
 export default function Locations() {
     const [activeTab, setActiveTab] = useState('')
@@ -16,18 +16,8 @@ export default function Locations() {
                 <div className="w-full md:w-2/3 h-[70vh] md:h-auto mr-4 bg-primary-dark">
                     <MapLoadWrapper>
                         <div className="w-full h-full">
-                            <LocationsMap />
-                            {activeTab === LOCATIONS_TABS_IDS.CONTINENTS && <ContinentsMapMarkers />}
-                            {activeTab === LOCATIONS_TABS_IDS.NORTH_AMERICA && (
-                                <MapMarkersByContinent continent={CONTINENTS.N_AMERICA} />
-                            )}
-                            {activeTab === LOCATIONS_TABS_IDS.SOUTH_AMERICA && (
-                                <MapMarkersByContinent continent={CONTINENTS.S_AMERICA} />
-                            )}
-                            {activeTab === LOCATIONS_TABS_IDS.EUROPE && (
-                                <MapMarkersByContinent continent={CONTINENTS.EUROPE} delay={50} />
-                            )}
-                            {activeTab === LOCATIONS_TABS_IDS.ASIA && <MapMarkersByContinent continent={CONTINENTS.ASIA} />}
+                            <LocationsMap activeArea={activeTab} />
+                            {activeTab === AREAS.CONTINENT && <ContinentsMapMarkers />}
                         </div>
                     </MapLoadWrapper>
                 </div>
@@ -44,14 +34,14 @@ export default function Locations() {
                         <h3 className="font-black text-white text-4xl">Locations</h3>
                     </div>
 
-                    {LOCATIONS_TABS.map(({ Component, Header, title, id, continent }, i) => (
+                    {LOCATIONS_TABS.map(({ Component, title, subtitle, id, continent }, i) => (
                         <div key={i} className="overflow-hidden text-primary-dark">
                             <Accordion
                                 tabId={id}
-                                Header={Header}
+                                title={title}
+                                subtitle={subtitle}
                                 expanded={activeTab}
                                 setExpanded={setActiveTab}
-                                title={title}
                                 bgColor="#209EBC"
                             >
                                 <Component continent={continent} />

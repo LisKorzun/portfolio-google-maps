@@ -1,11 +1,27 @@
 export const LOGO_IMAGE = '/logo.png'
 export const MARKER_IMAGE = '/map-marker.png'
 
-export const CONTINENTS = {
+export const AREAS = {
     EUROPE: 'Europe',
     ASIA: 'Asia',
     N_AMERICA: 'North America',
     S_AMERICA: 'South America',
+    CONTINENT: 'Continents',
+    CHILE: 'CHILE',
+    CANADA: 'CANADA',
+    USA: 'USA',
+    BRAZIL: 'BRAZIL',
+    COLOMBIA: 'COLOMBIA',
+    GEORGIA: 'GEORGIA',
+    UZBEKISTAN: 'UZBEKISTAN',
+    BULGARIA: 'BULGARIA',
+    GERMANY: 'GERMANY',
+    HUNGARY: 'HUNGARY',
+    LITHUANIA: 'LITHUANIA',
+    POLAND: 'POLAND',
+    SWITZERLAND: 'SWITZERLAND',
+    UKRAINE: 'UKRAINE',
+    BELARUS: 'BELARUS',
 }
 
 export const STATUS = {

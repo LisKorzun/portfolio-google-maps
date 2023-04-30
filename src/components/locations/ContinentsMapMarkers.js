@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react'
 import { MarkerClusterer, SuperClusterAlgorithm } from '@googlemaps/markerclusterer'
-import { markersByContinent } from '@/data'
+import { officesByContinent } from '@/data'
 import { mapValues } from 'lodash'
 import { templateComplexInfo } from '@/components/templates'
 import { LOGO_IMAGE as logo, MARKER_IMAGE } from '@/constants'
@@ -20,7 +20,7 @@ export const ContinentsMapMarkers = () => {
         const initialBounds = new google.maps.LatLngBounds()
         const infoWindow = new google.maps.InfoWindow()
 
-        const clusters = mapValues(markersByContinent, (data) => {
+        const clusters = mapValues(officesByContinent, (data) => {
             // Create markers for every continent cluster
             const markers = data.map(({ position, ...rest }) => {
                 const marker = new window.google.maps.Marker({

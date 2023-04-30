@@ -3,7 +3,7 @@ import { smoothTransition } from '@/animations'
 import { CloseIcon, FocusIcon } from '@/components/icons'
 import { isEmpty } from 'lodash'
 
-export default function Accordion({ tabId, expanded, setExpanded, title, subtitle, bgColor, children }) {
+export default function Accordion({ tabId, expanded, setExpanded, title, subtitle, bgColor, children, onChanged }) {
     const isOpen = tabId === expanded
 
     return (
@@ -23,12 +23,15 @@ export default function Accordion({ tabId, expanded, setExpanded, title, subtitl
                 className={`${isOpen && 'text-primary-light'}`}
             >
                 <header
-                    className="text-lg font-medium px-8  py-6 border-inherit cursor-pointer flex justify-between"
-                    onClick={() => setExpanded(isOpen ? '' : tabId)}
+                    className="text-lg font-medium px-8 py-4 border-inherit cursor-pointer flex justify-between items-center"
+                    onClick={() => {
+                        setExpanded && setExpanded(isOpen ? '' : tabId)
+                        onChanged && onChanged(isOpen ? '' : tabId)
+                    }}
                 >
-                    <div className="leading-none">
-                        {title}
-                        {subtitle ?? <div className="text-sm"> {subtitle}</div>}
+                    <div className="leading-snug">
+                        <div>{title}</div>
+                        {subtitle && <div className="text-sm font-light"> {subtitle}</div>}
                     </div>
                     {(!isOpen || isEmpty(expanded)) && (
                         <FocusIcon
