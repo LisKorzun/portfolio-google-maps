@@ -1,4 +1,4 @@
-import { groupBy, keys } from 'lodash'
+import { concat, groupBy, keys, map, reduce } from 'lodash'
 import { AREAS } from '@/constants'
 
 const { EUROPE, ASIA, N_AMERICA, S_AMERICA, CHILE } = AREAS
@@ -75,24 +75,6 @@ const offices = [
         address: 'Cra 42 # 3 Sur 81 Business District Milla de Oro, Torre 1 Floor 15',
         phone: '+57 (324) 288 7703',
         image: '/img/SA-Medellin.webp',
-    },
-    {
-        position: { lat: 41.7105291666037, lng: 44.75528998259013 },
-        continent: AREAS.ASIA,
-        country: AREAS.GEORGIA,
-        city: 'Tbilisi',
-        address: 'Ilo Mosashvili st., 24 Tbilisi 0162',
-        phone: '+995 (577)247347',
-        image: '/img/A-Tbilisi.webp',
-    },
-    {
-        position: { lat: 41.348767386900185, lng: 69.3493276386204 },
-        continent: AREAS.ASIA,
-        country: AREAS.UZBEKISTAN,
-        city: 'Tashkent',
-        address: 'Mirzo Ulugbek Avenue, 73, Tashkent 100007',
-        phone: '+998 (71) 2300533',
-        image: '/img/A-Tashkent.webp',
     },
     {
         position: { lat: 42.70190519827743, lng: 23.31526012698264 },
@@ -283,18 +265,37 @@ const offices = [
         phone: '+375 21 248 63 42',
         image: '/img/EU-Vitebsk.webp',
     },
+    {
+        position: { lat: 41.7105291666037, lng: 44.75528998259013 },
+        continent: AREAS.ASIA,
+        country: AREAS.GEORGIA,
+        city: 'Tbilisi',
+        address: 'Ilo Mosashvili st., 24 Tbilisi 0162',
+        phone: '+995 (577)247347',
+        image: '/img/A-Tbilisi.webp',
+    },
+    {
+        position: { lat: 41.348767386900185, lng: 69.3493276386204 },
+        continent: AREAS.ASIA,
+        country: AREAS.UZBEKISTAN,
+        city: 'Tashkent',
+        address: 'Mirzo Ulugbek Avenue, 73, Tashkent 100007',
+        phone: '+998 (71) 2300533',
+        image: '/img/A-Tashkent.webp',
+    },
 ]
 
 export const officesByContinent = groupBy(offices, ({ continent }) => continent)
 export const officesByCountry = groupBy(offices, ({ country }) => country)
 export const officesByArea = { ...officesByContinent, ...officesByCountry }
-export const officesInEurope = officesByContinent[EUROPE]
-export const officesInAsia = officesByContinent[ASIA]
-export const officesInNAmerica = officesByContinent[N_AMERICA]
-export const officesInSAmerica = officesByContinent[S_AMERICA]
-export const countriesInEurope = keys(groupBy(officesInEurope, ({ country }) => country))
-export const countriesInAsia = keys(groupBy(officesInAsia, ({ country }) => country))
-export const countriesInNAmerica = keys(groupBy(officesInNAmerica, ({ country }) => country))
-export const countriesInSAmerica = keys(groupBy(officesInSAmerica, ({ country }) => country))
+export const continents = keys(officesByContinent)
+export const countriesByContinent = reduce(
+    officesByContinent,
+    (acc, val, key) => {
+        acc[key] = keys(groupBy(val, ({ country }) => country))
+        return acc
+    },
+    {}
+)
 
 export default offices

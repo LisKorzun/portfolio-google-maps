@@ -1,64 +1,7 @@
-import { keys } from 'lodash'
-import { BetweenTab } from '@/components/routes'
-import { TabByContinent } from '@/components/locations'
+import { concat, groupBy, keys, map } from 'lodash'
 import { AREAS } from '@/constants'
 import { darkMapStyles } from '@/mapStyled'
-import offices, {
-    officesByContinent,
-    officesInSAmerica,
-    officesInNAmerica,
-    countriesInNAmerica,
-    countriesInSAmerica,
-    officesInEurope,
-    countriesInEurope,
-    officesInAsia,
-    countriesInAsia,
-} from '@/data'
-
-export const LOCATIONS_TABS_IDS = {
-    CONTINENTS: 'continents',
-    NORTH_AMERICA: 'north-america',
-    SOUTH_AMERICA: 'south-america',
-    EUROPE: 'europe',
-    ASIA: 'asia',
-}
-
-export const LOCATIONS_TABS = [
-    {
-        id: AREAS.CONTINENT,
-        title: 'Explore Continents',
-        subtitle: `${offices.length} offices on ${keys(officesByContinent).length} continents`,
-        Component: BetweenTab,
-    },
-    {
-        id: AREAS.N_AMERICA,
-        continent: AREAS.N_AMERICA,
-        title: 'Explore North America',
-        subtitle: `${officesInNAmerica.length} offices in ${countriesInNAmerica.length} countries`,
-        Component: (props) => <TabByContinent {...props} />,
-    },
-    {
-        id: AREAS.S_AMERICA,
-        continent: AREAS.S_AMERICA,
-        title: 'Explore South America',
-        subtitle: `${officesInSAmerica.length} offices in ${countriesInSAmerica.length} countries`,
-        Component: (props) => <TabByContinent {...props} />,
-    },
-    {
-        id: AREAS.EUROPE,
-        continent: AREAS.EUROPE,
-        title: 'Explore Europe',
-        subtitle: `${officesInEurope.length} offices in ${countriesInEurope.length} countries`,
-        Component: (props) => <TabByContinent {...props} />,
-    },
-    {
-        id: AREAS.ASIA,
-        continent: AREAS.ASIA,
-        title: 'Explore Asia',
-        subtitle: `${officesInAsia.length} offices in ${countriesInAsia.length} countries`,
-        Component: (props) => <TabByContinent {...props} />,
-    },
-]
+import offices, { continents, officesByContinent } from '@/data'
 
 export const DEFAULT_ZOOM = 2.25
 export const DEFAULT_CENTER = { lat: 11.14695916085034, lng: -26.441557748896827 }
@@ -95,20 +38,96 @@ export const mapsOptions = {
         restriction: { latLngBounds: { north: 60, south: 20, east: 100, west: 20 } },
     },
 }
-export const zoomOptions = {
-    [AREAS.N_AMERICA]: 4,
-    [AREAS.S_AMERICA]: 4,
-    [AREAS.EUROPE]: 5,
-    [AREAS.ASIA]: 5,
-    [AREAS.CHILE]: 6,
-    [AREAS.COLOMBIA]: 6,
-    [AREAS.CANADA]: 6,
+
+export const mapSettingsByArea = {
+    [AREAS.N_AMERICA]: {
+        zoom: 4,
+        isAnimated: false,
+    },
+    [AREAS.S_AMERICA]: {
+        zoom: 4,
+        isAnimated: false,
+    },
+    [AREAS.EUROPE]: {
+        zoom: 5,
+        isAnimated: false,
+    },
+    [AREAS.ASIA]: {
+        zoom: 6,
+        isAnimated: false,
+    },
+    [AREAS.BRAZIL]: {
+        zoom: 5,
+        isAnimated: true,
+    },
+    [AREAS.CHILE]: {
+        zoom: 6,
+        isAnimated: true,
+    },
+    [AREAS.COLOMBIA]: {
+        zoom: 6,
+        isAnimated: true,
+    },
+    [AREAS.USA]: {
+        zoom: 5,
+        isAnimated: true,
+    },
+    [AREAS.CANADA]: {
+        zoom: 6,
+        isAnimated: true,
+    },
+    [AREAS.POLAND]: {
+        zoom: 6.5,
+        isAnimated: true,
+    },
+    [AREAS.BULGARIA]: {
+        zoom: 7,
+        isAnimated: true,
+    },
+    [AREAS.GERMANY]: {
+        zoom: 7,
+        isAnimated: true,
+    },
+    [AREAS.HUNGARY]: {
+        zoom: 7,
+        isAnimated: true,
+    },
+    [AREAS.SWITZERLAND]: {
+        zoom: 7.5,
+        isAnimated: true,
+    },
+    [AREAS.LITHUANIA]: {
+        zoom: 7,
+        isAnimated: true,
+    },
+    [AREAS.BELARUS]: {
+        zoom: 6.5,
+        isAnimated: true,
+    },
+    [AREAS.UKRAINE]: {
+        zoom: 6,
+        isAnimated: true,
+    },
 }
 
-export const isAnimated = {
-    [AREAS.CANADA]: true,
-    [AREAS.USA]: true,
-    [AREAS.BRAZIL]: true,
-    [AREAS.CHILE]: true,
-    [AREAS.COLOMBIA]: true,
-}
+export const continentTabs = concat(
+    [
+        {
+            id: AREAS.CONTINENT,
+            title: `Explore ${AREAS.CONTINENT}`,
+            subtitle: `${offices.length} offices on ${continents.length} continents`,
+        },
+    ],
+    map(continents, (continent) => {
+        const officesCount = officesByContinent[continent].length
+        const officesLabel = officesCount > 1 ? 'offices' : 'office'
+        const countriesCount = keys(groupBy(officesByContinent[continent], ({ country }) => country)).length
+        const countriesLabel = countriesCount > 1 ? 'countries' : 'country'
+
+        return {
+            id: continent,
+            title: `Explore ${continent}`,
+            subtitle: `${officesCount} ${officesLabel} in ${countriesCount} ${countriesLabel}`,
+        }
+    })
+)

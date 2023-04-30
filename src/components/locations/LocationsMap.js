@@ -1,19 +1,13 @@
 import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { DEFAULT_MAP_OPTIONS } from '@/components/locations/constants'
-import { useLocationsMap } from '@/components/locations/LocationsContext'
+import { DEFAULT_MAP_OPTIONS, useLocationsMap } from '@/components/locations'
 
-export const LocationsMap = ({ activeArea }) => {
+export const LocationsMap = () => {
     const mapRef = useRef()
-    const { setMap, renderMarkers } = useLocationsMap()
+    const { setMap } = useLocationsMap()
 
     useEffect(() => {
         setMap(new window.google.maps.Map(mapRef.current, DEFAULT_MAP_OPTIONS))
     }, [setMap])
 
-    useEffect(() => {
-        renderMarkers(activeArea)
-    }, [activeArea])
-
-    return <motion.div ref={mapRef} id="locations-map" className="w-full h-full" />
+    return <div ref={mapRef} id="locations-map" className="w-full h-full" />
 }

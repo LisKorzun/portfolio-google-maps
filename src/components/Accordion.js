@@ -3,7 +3,7 @@ import { smoothTransition } from '@/animations'
 import { CloseIcon, FocusIcon } from '@/components/icons'
 import { isEmpty } from 'lodash'
 
-export default function Accordion({ tabId, expanded, setExpanded, title, subtitle, bgColor, children, onChanged }) {
+export default function Accordion({ tabId, expanded, setExpanded, title, subtitle, bgColor, children, onChange }) {
     const isOpen = tabId === expanded
 
     return (
@@ -26,7 +26,7 @@ export default function Accordion({ tabId, expanded, setExpanded, title, subtitl
                     className="text-lg font-medium px-8 py-4 border-inherit cursor-pointer flex justify-between items-center"
                     onClick={() => {
                         setExpanded && setExpanded(isOpen ? '' : tabId)
-                        onChanged && onChanged(isOpen ? '' : tabId)
+                        onChange && onChange(isOpen ? '' : tabId)
                     }}
                 >
                     <div className="leading-snug">

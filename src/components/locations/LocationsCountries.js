@@ -1,20 +1,20 @@
-import { officesByContinent } from '@/data'
+import { countriesByContinent, officesByContinent, officesByCountry } from '@/data'
 import { groupBy, isEmpty, keys, map as mapArray } from 'lodash'
 import { useEffect, useState } from 'react'
 import Accordion from '@/components/Accordion'
 import { useLocationsMap } from '@/components/locations/LocationsContext'
 
-export const TabByContinent = ({ continent }) => {
+export const LocationsCountries = ({ continent }) => {
+    const [activeCountry, setActiveCountry] = useState('')
     const { renderMarkers } = useLocationsMap()
-    const [activeArea, setActiveArea] = useState('')
-    const officesByCountry = groupBy(officesByContinent[continent], ({ country }) => country)
-    const countries = keys(officesByCountry)
-    const onAreaChanged = (area) => {
-        setActiveArea(area)
-        if (isEmpty(area)) {
+
+    const countries = countriesByContinent[continent]
+    const onCountryChanged = (id) => {
+        setActiveCountry(id)
+        if (isEmpty(id)) {
             renderMarkers(continent)
         } else {
-            renderMarkers(area)
+            renderMarkers(id)
         }
     }
     return (
@@ -25,8 +25,8 @@ export const TabByContinent = ({ continent }) => {
                         tabId={country}
                         title={country}
                         subtitle={`${officesByCountry[country].length} offices`}
-                        expanded={activeArea}
-                        onChanged={onAreaChanged}
+                        expanded={activeCountry}
+                        onChange={onCountryChanged}
                         bgColor="#cbd5e1"
                     >
                         <div>{country}</div>
