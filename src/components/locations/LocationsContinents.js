@@ -33,18 +33,17 @@ export const LocationsContinents = () => {
             </div>
 
             {continentTabs.map(({ id, title, subtitle }, i) => (
-                <div key={i} className="overflow-hidden text-primary-dark">
-                    <Accordion
-                        tabId={id}
-                        title={title}
-                        subtitle={subtitle}
-                        expanded={activeContinent}
-                        onChange={onContinentChange}
-                        bgColor="#209EBC"
-                    >
-                        <LocationsCountries continent={id} />
-                    </Accordion>
-                </div>
+                <Accordion
+                    key={i}
+                    tabId={id}
+                    title={title}
+                    subtitle={subtitle}
+                    expanded={activeContinent}
+                    onChange={onContinentChange}
+                    bgColor="#209EBC"
+                >
+                    <LocationsCountries continent={id} />
+                </Accordion>
             ))}
         </>
     )

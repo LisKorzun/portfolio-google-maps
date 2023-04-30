@@ -20,10 +20,10 @@ export default function Accordion({ tabId, expanded, setExpanded, title, subtitl
                     color: { duration: 0.6, ease: [0.04, 0.62, 0.23, 0.98] },
                     height: { duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] },
                 }}
-                className={`${isOpen && 'text-primary-light'}`}
+                className="overflow-hidden"
             >
                 <header
-                    className="text-lg font-medium px-8 py-4 border-inherit cursor-pointer flex justify-between items-center"
+                    className="text-lg font-medium px-8 py-4 h-fit border-inherit cursor-pointer flex justify-between items-center"
                     onClick={() => {
                         setExpanded && setExpanded(isOpen ? '' : tabId)
                         onChange && onChange(isOpen ? '' : tabId)
@@ -57,12 +57,12 @@ export default function Accordion({ tabId, expanded, setExpanded, title, subtitl
                 {isOpen && (
                     <motion.section
                         key="content"
-                        className="bg-slate-100 border-b border-slate-100 text-sm overflow-hidden"
+                        className="bg-slate-100 border-b border-slate-100 text-sm overflow-scroll"
                         initial="collapsed"
                         animate="open"
                         exit="collapsed"
                         variants={{
-                            open: { opacity: 1, height: 495 },
+                            open: { opacity: 1, height: 300 },
                             collapsed: { opacity: 0, height: 0 },
                         }}
                         transition={smoothTransition}
