@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 import { useLocationsMap } from '@/components/locations'
 import { ZoomInIcon, ZoomOutIcon } from '@/components/icons'
-import Image from 'next/image'
 import { smoothTransition } from '@/animations'
 
 export const LocationsCityDetails = ({ office }) => {

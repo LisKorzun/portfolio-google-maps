@@ -1,7 +1,4 @@
-import { groupBy, keys, reduce } from 'lodash'
 import { AREAS } from '@/constants'
-
-const { EUROPE, ASIA, N_AMERICA, S_AMERICA, CHILE } = AREAS
 
 const offices = [
     {
@@ -284,18 +281,5 @@ const offices = [
         image: '/img/A-Tashkent.webp',
     },
 ]
-
-export const officesByContinent = groupBy(offices, ({ continent }) => continent)
-export const officesByCountry = groupBy(offices, ({ country }) => country)
-export const officesByArea = { ...officesByContinent, ...officesByCountry }
-export const continents = keys(officesByContinent)
-export const countriesByContinent = reduce(
-    officesByContinent,
-    (acc, val, key) => {
-        acc[key] = keys(groupBy(val, ({ country }) => country))
-        return acc
-    },
-    {}
-)
 
 export default offices
