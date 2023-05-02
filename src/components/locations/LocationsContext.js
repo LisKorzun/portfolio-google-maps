@@ -1,10 +1,8 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useCallback, useContext, useState } from 'react'
 import { isEmpty, mapValues } from 'lodash'
 import { MarkerClusterer, SuperClusterAlgorithm } from '@googlemaps/markerclusterer'
 
 import { LOGO_IMAGE as logo, MARKER_IMAGE } from '@/constants'
-import { officesByArea, officesByContinent } from '@/data'
-import { DEFAULT_CENTER, DEFAULT_MAP_OPTIONS, DEFAULT_ZOOM, mapSettingsByArea } from '@/components/locations/constants'
 import { templateComplexInfo } from '@/components/templates'
 
 export const LocationsContext = createContext({})
@@ -15,17 +13,34 @@ export const LocationsProvider = ({ children }) => {
     const [map, setMap] = useState()
     const [markers, setMarkers] = useState([])
     const [clusters, setClusters] = useState([])
+    const [bounds, setBounds] = useState([])
+    const [zoom, setZoom] = useState()
+    const [panorama, setPanorama] = useState()
+    const [info, setInfo] = useState()
 
-    const renderMarkers = (area) => {
+    const initMap = useCallback((ref, options) => {
+        const mapInstance = new window.google.maps.Map(ref, options)
+        const infoInstance = new google.maps.InfoWindow()
+        setMap(mapInstance)
+        setInfo(infoInstance)
+        setPanorama(mapInstance.getStreetView())
+
+        mapInstance.addListener('zoom_changed', () => {
+            infoInstance.close()
+        })
+    }, [])
+    const clearMap = () => {
+        panorama.setVisible(false)
+        markers.forEach((marker) => marker.setMap(null))
+        mapValues(clusters, (cluster) => cluster.setMap(null))
+    }
+
+    const renderMarkers = (offices, areaZoom, animate) => {
         if (!map) return
-        clearMap()
-        if (!isEmpty(area)) {
-            const offices = officesByArea[area]
-            const settings = mapSettingsByArea[area]
-            const animate = settings?.isAnimated
-            const initialBounds = new google.maps.LatLngBounds()
-            const infoWindow = new google.maps.InfoWindow()
 
+        clearMap()
+        if (!isEmpty(offices)) {
+            const initialBounds = new google.maps.LatLngBounds()
             const mapMarkers = offices.map(({ position, ...rest }, i) => {
                 const marker = new google.maps.Marker({
                     position,
@@ -35,8 +50,8 @@ export const LocationsProvider = ({ children }) => {
                 initialBounds.extend(position)
                 // Add Info Window to them on marker click
                 marker.addListener('click', () => {
-                    infoWindow.setContent(templateComplexInfo({ ...rest, logo }))
-                    infoWindow.open(map, marker)
+                    info.setContent(templateComplexInfo({ ...rest, logo }))
+                    info.open(map, marker)
                 })
                 if (animate) {
                     // Add markers to the map sequentially
@@ -51,29 +66,20 @@ export const LocationsProvider = ({ children }) => {
                 }
                 return marker
             })
-            // Close infoWindow on zoom changed event
-            map.addListener('zoom_changed', () => {
-                infoWindow.close()
-            })
             map.setCenter(initialBounds.getCenter())
-            map.setZoom(settings?.zoom ?? 5)
-
+            map.setZoom(areaZoom)
+            setBounds(initialBounds)
             setMarkers(mapMarkers)
-        } else {
-            setMarkers([])
-            map.setOptions(DEFAULT_MAP_OPTIONS)
-            map.setZoom(DEFAULT_ZOOM)
-            map.setCenter(DEFAULT_CENTER)
+            setZoom(areaZoom)
         }
     }
 
-    const renderClusters = () => {
+    const renderClusters = (officesByContinent, areaZoom) => {
         if (!map) return
 
-        clearMap()
-        map.setZoom(DEFAULT_ZOOM)
+        markers.forEach((marker) => marker.setMap(null))
+        map.setZoom(areaZoom)
         const initialBounds = new google.maps.LatLngBounds()
-        const infoWindow = new google.maps.InfoWindow()
         const clusters = mapValues(officesByContinent, (data) => {
             // Create markers for every continent cluster
             const markers = data.map(({ position, ...rest }) => {
@@ -82,10 +88,9 @@ export const LocationsProvider = ({ children }) => {
                     icon: MARKER_IMAGE,
                 })
                 initialBounds.extend(position)
-                // Add Info Window to them on marker click
                 marker.addListener('click', () => {
-                    infoWindow.setContent(templateComplexInfo({ ...rest, logo }))
-                    infoWindow.open(map, marker)
+                    info.setContent(templateComplexInfo({ ...rest, logo }))
+                    info.open(map, marker)
                 })
                 return marker
             })
@@ -96,20 +101,32 @@ export const LocationsProvider = ({ children }) => {
                 algorithm: new SuperClusterAlgorithm({ radius: 280 }),
             })
         })
-        // Close infoWindow on zoom changed event
-        map.addListener('zoom_changed', () => {
-            infoWindow.close()
-        })
         map.setCenter(initialBounds.getCenter())
         setClusters(clusters)
     }
 
-    const clearMap = () => {
-        markers.forEach((marker) => marker.setMap(null))
-        mapValues(clusters, (cluster) => cluster.setMap(null))
+    const zoomIn = (position, zoom) => {
+        map.setCenter(position)
+        map.setZoom(zoom)
+    }
+    const zoomOutBack = () => {
+        map.setCenter(bounds.getCenter())
+        map.setZoom(zoom)
+    }
+    const renderPanorama = (position, isVisible) => {
+        panorama.setPosition(position)
+        panorama.setVisible(isVisible)
     }
 
-    const providerState = { map, setMap, renderMarkers, renderClusters }
+    const providerState = {
+        map,
+        initMap,
+        renderMarkers,
+        renderClusters,
+        renderPanorama,
+        zoomIn,
+        zoomOutBack,
+    }
 
     return <LocationsContext.Provider value={providerState}>{children}</LocationsContext.Provider>
 }

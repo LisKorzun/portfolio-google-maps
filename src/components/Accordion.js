@@ -3,7 +3,17 @@ import { smoothTransition } from '@/animations'
 import { CloseIcon, FocusIcon } from '@/components/icons'
 import { isEmpty } from 'lodash'
 
-export default function Accordion({ tabId, expanded, setExpanded, title, subtitle, bgColor, children, onChange }) {
+export default function Accordion({
+    tabId,
+    expanded,
+    setExpanded,
+    title,
+    subtitle,
+    children,
+    onChange,
+    bgColor,
+    textColor = '#fff',
+}) {
     const isOpen = tabId === expanded
 
     return (
@@ -13,7 +23,7 @@ export default function Accordion({ tabId, expanded, setExpanded, title, subtitl
                 animate={{
                     height: isOpen || isEmpty(expanded) ? 'auto' : 0,
                     backgroundColor: isOpen ? bgColor : '#fff',
-                    color: isOpen ? '#fff' : '#023047',
+                    color: isOpen ? textColor : '#023047',
                 }}
                 transition={{
                     backgroundColor: { duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] },
@@ -31,7 +41,7 @@ export default function Accordion({ tabId, expanded, setExpanded, title, subtitl
                 >
                     <div className="leading-snug">
                         <div>{title}</div>
-                        {subtitle && <div className="text-sm font-light"> {subtitle}</div>}
+                        {subtitle && <div className="text-xs font-light"> {subtitle}</div>}
                     </div>
                     {(!isOpen || isEmpty(expanded)) && (
                         <FocusIcon
@@ -57,12 +67,12 @@ export default function Accordion({ tabId, expanded, setExpanded, title, subtitl
                 {isOpen && (
                     <motion.section
                         key="content"
-                        className="bg-slate-100 border-b border-slate-100 text-sm overflow-scroll"
+                        className="text-sm overflow-scroll"
                         initial="collapsed"
                         animate="open"
                         exit="collapsed"
                         variants={{
-                            open: { opacity: 1, height: 300 },
+                            open: { opacity: 1, height: 'auto' },
                             collapsed: { opacity: 0, height: 0 },
                         }}
                         transition={smoothTransition}

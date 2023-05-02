@@ -1,26 +1,29 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { groupBy, isEmpty } from 'lodash'
 import Image from 'next/image'
 
 import Accordion from '@/components/Accordion'
-import { continentTabs, LocationsCountries, useLocationsMap } from '@/components/locations'
-import { AREAS } from '@/constants'
+import { generateContinentsTabs, getZoomByArea, LocationsCountries, useLocationsMap } from '@/components/locations'
 
-export const LocationsContinents = () => {
+export const LocationsContinents = ({ offices }) => {
     const [activeContinent, setActiveContinent] = useState('')
     const { renderMarkers, renderClusters } = useLocationsMap()
 
-    const onContinentChange = (id) => {
-        setActiveContinent(id)
-        if (id === AREAS.CONTINENT) {
-            renderClusters()
+    const officesByContinent = useMemo(() => groupBy(offices, ({ continent }) => continent), [offices])
+    const continentsTabs = useMemo(() => generateContinentsTabs(officesByContinent), [officesByContinent])
+
+    const onContinentChange = (offices, zoom) => (continent) => {
+        setActiveContinent(continent)
+        if (isEmpty(continent)) {
+            renderClusters(officesByContinent, getZoomByArea())
         } else {
-            renderMarkers(id)
+            renderMarkers(offices, zoom, false)
         }
     }
 
     return (
         <>
-            <div className="w-full px-8 pt-16 pb-6 flex items-center relative bg-primary-dark">
+            <div className="w-full px-8 pt-16 pb-6 flex flex-col justify-center relative bg-primary-dark">
                 <Image
                     src="/way-finder-primary-light.png"
                     alt="way-finder"
@@ -30,19 +33,20 @@ export const LocationsContinents = () => {
                     className="absolute top-0 left-7 w-auto h-auto opacity-50"
                 />
                 <h3 className="font-black text-white text-4xl">Locations</h3>
+                <div className="text-white text-xs">{`${offices.length} offices on ${continentsTabs.length} continents`}</div>
             </div>
 
-            {continentTabs.map(({ id, title, subtitle }, i) => (
+            {continentsTabs.map(({ id, title, subtitle, offices, zoom }, i) => (
                 <Accordion
                     key={i}
                     tabId={id}
                     title={title}
                     subtitle={subtitle}
                     expanded={activeContinent}
-                    onChange={onContinentChange}
+                    onChange={onContinentChange(offices, zoom)}
                     bgColor="#209EBC"
                 >
-                    <LocationsCountries continent={id} />
+                    <LocationsCountries continent={id} continentOffices={offices} />
                 </Accordion>
             ))}
         </>

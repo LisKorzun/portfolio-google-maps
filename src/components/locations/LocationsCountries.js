@@ -1,38 +1,45 @@
-import { countriesByContinent, officesByCountry } from '@/data'
-import { isEmpty, map as mapArray } from 'lodash'
-import { useState } from 'react'
-import Accordion from '@/components/Accordion'
-import { useLocationsMap } from '@/components/locations/LocationsContext'
+import { useMemo, useState } from 'react'
+import { groupBy, isEmpty, keys, map } from 'lodash'
 
-export const LocationsCountries = ({ continent }) => {
+import Accordion from '@/components/Accordion'
+import { getZoomByArea, LocationsCities, useLocationsMap } from '@/components/locations'
+import { DEFAULT_CONTINENT_ZOOM, DEFAULT_COUNTRY_ZOOM } from '@/components/locations/constants'
+
+export const LocationsCountries = ({ continent, continentOffices }) => {
     const [activeCountry, setActiveCountry] = useState('')
     const { renderMarkers } = useLocationsMap()
-    const countries = countriesByContinent[continent]
 
-    const onCountryChanged = (id) => {
-        setActiveCountry(id)
-        if (isEmpty(id)) {
-            renderMarkers(continent)
+    const officesByCountry = useMemo(() => groupBy(continentOffices, ({ country }) => country), [continentOffices])
+    const countries = keys(officesByCountry)
+
+    const onCountryChanged = (offices) => (country) => {
+        setActiveCountry(country)
+        if (isEmpty(country)) {
+            renderMarkers(continentOffices, getZoomByArea(continent, DEFAULT_CONTINENT_ZOOM), false)
         } else {
-            renderMarkers(id)
+            renderMarkers(offices, getZoomByArea(country, DEFAULT_COUNTRY_ZOOM), true)
         }
     }
     return (
         <>
-            {mapArray(countries, (country, i) => (
-                <Accordion
-                    key={i}
-                    tabId={country}
-                    title={country}
-                    subtitle={`${officesByCountry[country].length} offices`}
-                    expanded={activeCountry}
-                    onChange={onCountryChanged}
-                    bgColor="#cbd5e1"
-                >
-                    <div>{country}</div>
-                    <div>{officesByCountry[country].length} offices</div>
-                </Accordion>
-            ))}
+            {map(countries, (country, i) => {
+                const citiesCount = officesByCountry[country].length
+
+                return (
+                    <Accordion
+                        key={i}
+                        tabId={country}
+                        title={country}
+                        subtitle={`${citiesCount} ${citiesCount > 1 ? 'cities' : 'city'}`}
+                        expanded={activeCountry}
+                        onChange={onCountryChanged(officesByCountry[country])}
+                        bgColor="#e2e8f0"
+                        textColor="#023047"
+                    >
+                        <LocationsCities country={country} countryOffices={officesByCountry[country]} />
+                    </Accordion>
+                )
+            })}
         </>
     )
 }

@@ -6,7 +6,7 @@ import { ContentWrapper } from '@/components/wrappers'
 export default function Home() {
     return (
         <ContentWrapper>
-            <div className="w-full md:w-1/2 lg:w-2/3 h-[50vh] bg-primary-dark overflow-hidden relative md:h-[70vh] md:mr-4">
+            <div className="w-full md:w-1/2 lg:w-2/3 h-[50vh] bg-primary-dark overflow-hidden relative md:h-full md:mr-4">
                 <MotionImage
                     src="/continents.png"
                     alt="Logo"
