@@ -23,7 +23,7 @@ export default function App({ Component, pageProps, router }) {
                 <Head>
                     <title>Exadel Offices</title>
                 </Head>
-                <div className="min-h-screen md:max-h-screen grid grid-rows-mobile lg:grid-rows-desktop">
+                <div className="overflow-hidden min-h-screen md:max-h-screen grid grid-rows-mobile lg:grid-rows-desktop">
                     <nav className="w-full mx-auto px-8 py-7 flex items-center md:px-0 md:container">
                         <Link href="/">
                             <Image src={LOGO_IMAGE} alt="Exadel Logo" width={248} height={49} priority />

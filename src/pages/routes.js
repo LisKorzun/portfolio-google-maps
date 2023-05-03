@@ -70,7 +70,13 @@ export default function Routes() {
 
                     {ROUTES_TABS.map(({ Component, title, id }, i) => (
                         <div key={i} className="overflow-hidden text-primary-dark">
-                            <Accordion tabId={id} expanded={activeTab} setExpanded={setActiveTab} title={title} bgColor="#023047">
+                            <Accordion
+                                tabId={id}
+                                expanded={activeTab}
+                                setExpanded={setActiveTab}
+                                title={title}
+                                expandedBgColor="#023047"
+                            >
                                 <Component />
                             </Accordion>
                         </div>
