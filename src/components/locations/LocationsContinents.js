@@ -23,7 +23,7 @@ export const LocationsContinents = ({ offices }) => {
 
     return (
         <>
-            <div className="w-full px-8 pt-16 pb-6 flex flex-col justify-center relative bg-primary-dark">
+            <div className="w-full px-8 py-6 flex flex-col justify-end relative bg-primary-dark h-[140px]">
                 <Image
                     src="/way-finder-primary-light.png"
                     alt="way-finder"
@@ -44,7 +44,6 @@ export const LocationsContinents = ({ offices }) => {
                     subtitle={subtitle}
                     expanded={activeContinent}
                     onChange={onContinentChange(offices, zoom)}
-                    bgColor="#209EBC"
                 >
                     <LocationsCountries continent={id} continentOffices={offices} />
                 </Accordion>

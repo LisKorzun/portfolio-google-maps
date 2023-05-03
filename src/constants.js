@@ -1,6 +1,10 @@
 export const LOGO_IMAGE = '/logo.png'
 export const MARKER_IMAGE = '/map-marker.png'
 
+export const MIN_CONTENT_HEIGHT = 560
+export const CONTENT_HEADING_HEIGHT = 140
+export const ACCORDION_HEADER_HEIGHT = 65
+
 export const AREAS = {
     EUROPE: 'Europe',
     ASIA: 'Asia',

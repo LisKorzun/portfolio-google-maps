@@ -33,8 +33,9 @@ export const LocationsCountries = ({ continent, continentOffices }) => {
                         subtitle={`${citiesCount} ${citiesCount > 1 ? 'cities' : 'city'}`}
                         expanded={activeCountry}
                         onChange={onCountryChanged(officesByCountry[country])}
-                        bgColor="#e2e8f0"
-                        textColor="#023047"
+                        expandedBgColor="#e2e8f0"
+                        expandedTextColor="#023047"
+                        level={2}
                     >
                         <LocationsCities country={country} countryOffices={officesByCountry[country]} />
                     </Accordion>

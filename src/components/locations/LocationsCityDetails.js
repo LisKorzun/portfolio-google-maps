@@ -30,34 +30,41 @@ export const LocationsCityDetails = ({ office }) => {
     }
 
     return (
-        <div className="p-8 flex flex-col items-center text-primary-dark">
-            <Image src={office.image} alt={office.city} width={150} height={150} priority />
-            <div className="text-base  font-bold my-2">
-                Office in {office.city}, {office.country}
-            </div>
-            <div className="text-xs  mb-1">{office.address}</div>
-            <div className="text-xs  mb-5">{office.phone}</div>
-            <div className="flex gap-2">
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    transition={smoothTransition}
-                    className="text-white bg-primary-dark py-2 px-4 border-none outline-none"
-                    onClick={toggleZoomIn}
-                >
-                    {zoomedIn ? (
-                        <ZoomOutIcon className="w-6 h-6 shrink-0" key="zoom-out" />
-                    ) : (
-                        <ZoomInIcon className="w-6 h-6 shrink-0" key="zoom-in" />
-                    )}
-                </motion.button>
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    transition={smoothTransition}
-                    className="text-white bg-primary-dark py-2 px-4 border-none outline-none"
-                    onClick={togglePanorama}
-                >
-                    {panoramaShown ? 'Hide' : 'Show'} panorama
-                </motion.button>
+        <div className="p-8 flex md:flex-col xl:flex-row gap-4 text-primary-dark">
+            <Image src={office.image} alt={office.city} width={160} height={160} priority className="min-w-[160px]" />
+            <div className="flex flex-col justify-between">
+                <div>
+                    <div className="text-base leading-snug font-bold">
+                        Office in {office.city}, {office.country}
+                    </div>
+
+                    <div className="flex gap-2 my-5">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            transition={smoothTransition}
+                            className="text-white bg-primary-dark py-2 px-4 border-none outline-none"
+                            onClick={toggleZoomIn}
+                        >
+                            {zoomedIn ? (
+                                <ZoomOutIcon className="w-6 h-6 shrink-0" key="zoom-out" />
+                            ) : (
+                                <ZoomInIcon className="w-6 h-6 shrink-0" key="zoom-in" />
+                            )}
+                        </motion.button>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            transition={smoothTransition}
+                            className="text-white bg-primary-dark py-2 px-4 border-none outline-none"
+                            onClick={togglePanorama}
+                        >
+                            {panoramaShown ? 'Hide' : 'Show'} panorama
+                        </motion.button>
+                    </div>
+                </div>
+                <div>
+                    <div className="text-xs  mb-1">{office.address}</div>
+                    <div className="text-xs">{office.phone}</div>
+                </div>
             </div>
         </div>
     )

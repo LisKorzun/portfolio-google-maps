@@ -34,8 +34,9 @@ export const LocationsCities = ({ country, countryOffices }) => {
                     subtitle="1 office"
                     expanded={activeCity}
                     onChange={onCityChanged(officesByCity[city])}
-                    bgColor="#f1f5f9"
-                    textColor="#023047"
+                    expandedBgColor="#f1f5f9"
+                    expandedTextColor="#023047"
+                    level={3}
                 >
                     <LocationsCityDetails office={officesByCity[city][0]} />
                 </Accordion>

@@ -1,7 +1,13 @@
+import isEmpty from 'lodash/isEmpty'
 import { AnimatePresence, motion } from 'framer-motion'
+
 import { smoothTransition } from '@/animations'
+import { ACCORDION_HEADER_HEIGHT, CONTENT_HEADING_HEIGHT, MIN_CONTENT_HEIGHT } from '@/constants'
 import { CloseIcon, FocusIcon } from '@/components/icons'
-import { isEmpty } from 'lodash'
+import { useWindowSize } from '@/hooks/useWindowSize'
+
+const DEFAULT_BG = '#ffffff'
+const DEFAULT_COLOR = '#023047'
 
 export default function Accordion({
     tabId,
@@ -11,19 +17,29 @@ export default function Accordion({
     subtitle,
     children,
     onChange,
-    bgColor,
-    textColor = '#fff',
+    expandedBgColor = '#209EBC',
+    expandedTextColor = '#fff',
+    level = 1,
 }) {
     const isOpen = tabId === expanded
+    const { width, height } = useWindowSize()
+    const sectionHeight = height - 300 < MIN_CONTENT_HEIGHT ? MIN_CONTENT_HEIGHT : height - 300
+    const detailsHeight = width < 865 ? 'auto' : sectionHeight - CONTENT_HEADING_HEIGHT - level * ACCORDION_HEADER_HEIGHT
 
     return (
         <>
             <motion.div
-                initial={{ height: 'auto', backgroundColor: '#fff', color: '#023047' }}
+                initial={{
+                    height: ACCORDION_HEADER_HEIGHT,
+                    backgroundColor: DEFAULT_BG,
+                    color: DEFAULT_COLOR,
+                    opacity: 1,
+                }}
                 animate={{
-                    height: isOpen || isEmpty(expanded) ? 'auto' : 0,
-                    backgroundColor: isOpen ? bgColor : '#fff',
-                    color: isOpen ? textColor : '#023047',
+                    height: isOpen || isEmpty(expanded) ? ACCORDION_HEADER_HEIGHT : 0,
+                    backgroundColor: isOpen ? expandedBgColor : DEFAULT_BG,
+                    color: isOpen ? expandedTextColor : DEFAULT_COLOR,
+                    opacity: isOpen || isEmpty(expanded) ? 1 : 0,
                 }}
                 transition={{
                     backgroundColor: { duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] },
@@ -33,7 +49,7 @@ export default function Accordion({
                 className="overflow-hidden"
             >
                 <header
-                    className="text-lg font-medium px-8 py-4 h-fit border-inherit cursor-pointer flex justify-between items-center"
+                    className={`text-lg font-medium pr-8 pl-8 py-1 h-full border-inherit cursor-pointer flex justify-between items-center`}
                     onClick={() => {
                         setExpanded && setExpanded(isOpen ? '' : tabId)
                         onChange && onChange(isOpen ? '' : tabId)
@@ -67,12 +83,12 @@ export default function Accordion({
                 {isOpen && (
                     <motion.section
                         key="content"
-                        className="text-sm overflow-scroll"
+                        className="text-sm overflow-auto"
                         initial="collapsed"
                         animate="open"
                         exit="collapsed"
                         variants={{
-                            open: { opacity: 1, height: 'auto' },
+                            open: { opacity: 1, height: detailsHeight },
                             collapsed: { opacity: 0, height: 0 },
                         }}
                         transition={smoothTransition}

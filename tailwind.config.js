@@ -19,7 +19,7 @@ module.exports = {
             },
             gridTemplateRows: {
                 mobile: '200px auto 100px',
-                desktop: '200px minmax(500px, calc(100vh - 100px - 200px)) 100px',
+                desktop: '200px minmax(560px, calc(100vh - 100px - 200px)) 100px',
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
