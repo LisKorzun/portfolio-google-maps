@@ -54,7 +54,7 @@ export const LocationsCityDetails = ({ office }) => {
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             transition={smoothTransition}
-                            className="text-white bg-primary-dark py-2 px-4 border-none outline-none"
+                            className="text-white bg-primary-dark py-2 px-4 border-none outline-none text-xs"
                             onClick={togglePanorama}
                         >
                             {panoramaShown ? 'Hide' : 'Show'} panorama

@@ -4,6 +4,7 @@ import { MarkerClusterer, SuperClusterAlgorithm } from '@googlemaps/markercluste
 
 import { LOGO_IMAGE as logo, MARKER_IMAGE } from '@/constants'
 import { templateComplexInfo } from '@/components/templates'
+import { PANORAMA_OPTIONS } from '@/components/locations/constants'
 
 export const LocationsContext = createContext({})
 
@@ -21,10 +22,16 @@ export const LocationsProvider = ({ children }) => {
     const initMap = useCallback((ref, options) => {
         const mapInstance = new window.google.maps.Map(ref, options)
         const infoInstance = new google.maps.InfoWindow()
+        const panoramaInstance = mapInstance.getStreetView()
+        panoramaInstance.setOptions(PANORAMA_OPTIONS)
+
         setMap(mapInstance)
         setInfo(infoInstance)
-        setPanorama(mapInstance.getStreetView())
+        setPanorama(panoramaInstance)
 
+        panoramaInstance.addListener('status_changed', () => {
+            console.log(panoramaInstance.getPosition(), panoramaInstance.getStatus())
+        })
         mapInstance.addListener('zoom_changed', () => {
             infoInstance.close()
         })
@@ -114,7 +121,9 @@ export const LocationsProvider = ({ children }) => {
         map.setZoom(zoom)
     }
     const renderPanorama = (position, isVisible) => {
+        console.log(position)
         panorama.setPosition(position)
+        console.log(panorama.getPosition(), panorama.getStatus())
         panorama.setVisible(isVisible)
     }
 

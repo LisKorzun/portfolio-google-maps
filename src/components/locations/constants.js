@@ -18,3 +18,9 @@ export const DEFAULT_MAP_OPTIONS = {
     restriction: undefined,
     styles: darkMapStyles,
 }
+
+export const PANORAMA_OPTIONS = {
+    addressControl: false,
+    zoomControlOptions: { position: 3 },
+    enableCloseButton: false,
+}
