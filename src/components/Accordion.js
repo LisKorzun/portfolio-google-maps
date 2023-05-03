@@ -88,8 +88,14 @@ export default function Accordion({
                         animate="open"
                         exit="collapsed"
                         variants={{
-                            open: { opacity: 1, height: detailsHeight },
-                            collapsed: { opacity: 0, height: 0 },
+                            open: {
+                                opacity: 1,
+                                height: detailsHeight,
+                                transitionEnd: {
+                                    overflow: 'auto',
+                                },
+                            },
+                            collapsed: { opacity: 0, height: 0, overflow: 'hidden' },
                         }}
                         transition={smoothTransition}
                     >
