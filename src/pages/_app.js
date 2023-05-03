@@ -30,7 +30,7 @@ export default function App({ Component, pageProps, router }) {
                             <div className="text-primary-dark font-bold text-3xl mt-0.5">Offices</div>
                         </Link>
                     </nav>
-                    <AnimatePresence mode="wait" initial={true} onExitComplete={() => window.scrollTo(0, 0)}>
+                    <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
                         <Component {...pageProps} key={page} />
                     </AnimatePresence>
                     <footer className="w-full mx-auto px-8 py-4 flex justify-end items-end text-primary-dark text-[10px] md:px-0 md:container">
