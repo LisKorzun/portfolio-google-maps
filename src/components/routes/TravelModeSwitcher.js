@@ -3,6 +3,7 @@ import { useNearestContext } from '@/components/routes/NearestContext'
 import { BicycleIcon, BusIcon, CarIcon, LocationMarkerIcon, PersonWalkingIcon } from '@/components/icons'
 import { TRAVEL_MODES } from '@/components/routes/constants'
 import { smoothTransition } from '@/animations'
+import { COLOURS } from '@/constants'
 
 const iconsMap = {
     [TRAVEL_MODES.DRIVING]: CarIcon,
@@ -76,7 +77,7 @@ export const TravelModeSwitcher = () => {
             </div>
             <motion.div
                 key={travelMode}
-                className="flex gap-2 w-full justify-start text-slate-700 overflow-x-scroll overflow-y-auto h-fit mt-6"
+                className="flex gap-2 w-full justify-start text-slate-700 overflow-auto h-fit mt-6"
                 initial={{ y: 100 }}
                 animate={{ y: 0 }}
                 transition={{ ...smoothTransition, delay: 0.4 }}
@@ -88,7 +89,7 @@ export const TravelModeSwitcher = () => {
                         <motion.div
                             key={route.mode}
                             className="flex gap-2 py-2 px-4 border border-slate-200 items-center cursor-pointer min-w-fit min-h-fit"
-                            whileHover={{ scale: 1.08, backgroundColor: COLOURS.GRAY_200 }}
+                            whileHover={{ backgroundColor: COLOURS.GRAY_200 }}
                             initial={{ backgroundColor: COLOURS.WHITE }}
                             transition={smoothTransition}
                             onClick={() => changeTravelMode(route.mode)}
