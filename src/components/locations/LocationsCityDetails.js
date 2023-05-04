@@ -15,10 +15,8 @@ export const LocationsCityDetails = ({ office }) => {
     }, [])
 
     const toggleZoom = () => {
-        setZoomedIn((current) => {
-            current ? focusBack() : focusArea(DEFAULT_CITY_ZOOM_IN, office.position, false)
-            return !current
-        })
+        zoomedIn ? focusBack() : focusArea(DEFAULT_CITY_ZOOM_IN, office.position, false)
+        setZoomedIn((current) => !current)
     }
 
     return (

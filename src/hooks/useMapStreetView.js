@@ -27,7 +27,7 @@ export const useMapStreetView = (map) => {
         const options = {
             location: position,
             preference: window.google.maps.StreetViewPreference.BEST,
-            radius: 120,
+            radius: 80,
         }
         setPanoramaAvailable(false)
         streetViewService

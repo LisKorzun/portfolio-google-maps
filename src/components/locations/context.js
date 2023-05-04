@@ -1,9 +1,5 @@
 import { createContext, useCallback, useContext, useState } from 'react'
-import { useMapMarkers } from '@/components/locations/useMapMarkers'
-import { useMapClusters } from '@/components/locations/useMapClusters'
-import { useMapZoom } from '@/components/locations/useMapZoom'
-import { useMapInfoWindow } from '@/components/locations/useMapInfoWindow'
-import { useMapStreetView } from '@/components/locations/useMapStreetView'
+import { useMapMarkers, useMapClusters, useMapZoom, useMapInfoWindow, useMapStreetView } from '@/hooks'
 
 export const MapLocationsContext = createContext({})
 
