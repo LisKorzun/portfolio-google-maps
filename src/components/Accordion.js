@@ -2,12 +2,12 @@ import isEmpty from 'lodash/isEmpty'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { smoothTransition } from '@/animations'
-import { ACCORDION_HEADER_HEIGHT, CONTENT_HEADING_HEIGHT, MIN_CONTENT_HEIGHT } from '@/constants'
+import { ACCORDION_HEADER_HEIGHT, COLOURS, CONTENT_HEADING_HEIGHT, MIN_CONTENT_HEIGHT } from '@/constants'
 import { CloseIcon, FocusIcon } from '@/components/icons'
 import { useWindowSize } from '@/hooks/useWindowSize'
 
-const DEFAULT_BG = '#ffffff'
-const DEFAULT_COLOR = '#023047'
+const DEFAULT_BG = COLOURS.WHITE
+const DEFAULT_COLOR = COLOURS.PRIMARY_DARK
 
 export default function Accordion({
     tabId,
@@ -17,8 +17,8 @@ export default function Accordion({
     subtitle,
     children,
     onChange,
-    expandedBgColor = '#209EBC',
-    expandedTextColor = '#fff',
+    expandedBgColor = COLOURS.PRIMARY_LIGHT,
+    expandedTextColor = COLOURS.WHITE,
     level = 1,
 }) {
     const isOpen = tabId === expanded

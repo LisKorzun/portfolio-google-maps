@@ -75,7 +75,7 @@ export default function Routes() {
                                 expanded={activeTab}
                                 setExpanded={setActiveTab}
                                 title={title}
-                                expandedBgColor="#023047"
+                                expandedBgColor={COLOURS.PRIMARY_DARK}
                             >
                                 <Component />
                             </Accordion>

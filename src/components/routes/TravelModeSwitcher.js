@@ -88,8 +88,8 @@ export const TravelModeSwitcher = () => {
                         <motion.div
                             key={route.mode}
                             className="flex gap-2 py-2 px-4 border border-slate-200 items-center cursor-pointer min-w-fit min-h-fit"
-                            whileHover={{ scale: 1.08, backgroundColor: '#e2e8f0' }}
-                            initial={{ backgroundColor: '#fff' }}
+                            whileHover={{ scale: 1.08, backgroundColor: COLOURS.GRAY_200 }}
+                            initial={{ backgroundColor: COLOURS.WHITE }}
                             transition={smoothTransition}
                             onClick={() => changeTravelMode(route.mode)}
                         >

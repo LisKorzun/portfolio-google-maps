@@ -5,6 +5,9 @@
 :root {
     --foreground-rgb: 0, 0, 0;
     --background-rgb: 255, 255, 255;
+    --primary-dark: #023047;
+    --accent-teal: #76E5CF;
+    --color-gray-700: #334155;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,7 +41,7 @@ body {
 /* Google Styles Overrides */
 .adp .adp-placemark {
     margin: 0;
-    background-color: #023047;
+    background-color: var(--primary-dark);
     color: #fff;
     border: none;
     font-weight: 500;
@@ -50,12 +53,12 @@ body {
 
 .adp .adp-summary {
     padding: 10px 4px;
-    color: #023047;
+    color: var(--primary-dark);
     font-weight: 500;
 }
 
 .adp .adp-directions {
-    color: #334155;
+    color: var(--color-gray-700);
 }
 
 .adp .adp-legal {
@@ -67,8 +70,8 @@ body {
 }
 
 .adp .adp-warnbox .warnbox-content {
-    background-color: #76E5CF;
-    color: #023047;
+    background-color: var(--accent-teal);
+    color: var(--primary-dark);
     font-size: 12px;
 }
 

@@ -12,9 +12,9 @@ export const MotionIconButton = ({ children, onClick, activated = false, disable
         <motion.button
             className="py-2 px-4 border outline-none disabled:pointer-events-none "
             animate={{
-                backgroundColor: disabled ? '#f1f5f9' : activated ? COLOURS.PRIMARY_DARK : COLOURS.WHITE,
+                backgroundColor: disabled ? COLOURS.GRAY_100 : activated ? COLOURS.PRIMARY_DARK : COLOURS.WHITE,
                 color: disabled || activated ? COLOURS.WHITE : COLOURS.PRIMARY_DARK,
-                borderColor: disabled ? '#f1f5f9' : COLOURS.PRIMARY_DARK,
+                borderColor: disabled ? COLOURS.GRAY_100 : COLOURS.PRIMARY_DARK,
             }}
             transition={smoothTransition}
             disabled={disabled}

@@ -12,6 +12,7 @@ import {
     LocationsCityDetails,
     useMapLocations,
 } from '@/components/locations'
+import { COLOURS } from '@/constants'
 
 export const LocationsCities = ({ country, countryOffices }) => {
     const [activeCity, setActiveCity] = useState('')
@@ -39,8 +40,8 @@ export const LocationsCities = ({ country, countryOffices }) => {
                     subtitle="1 office"
                     expanded={activeCity}
                     onChange={onCityChanged(officesByCity[city])}
-                    expandedBgColor="#f1f5f9"
-                    expandedTextColor="#023047"
+                    expandedBgColor={COLOURS.GRAY_100}
+                    expandedTextColor={COLOURS.PRIMARY_DARK}
                     level={3}
                 >
                     <LocationsCityDetails office={officesByCity[city][0]} />

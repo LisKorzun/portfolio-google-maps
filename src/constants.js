@@ -12,6 +12,8 @@ export const COLOURS = {
     ACCENT_TEAL: '#76E5CF',
     ACCENT_SKY: '#8ECAE6',
     WHITE: '#FFF',
+    GRAY_100: '#f1f5f9',
+    GRAY_200: '#e2e8f0',
 }
 
 export const AREAS = {

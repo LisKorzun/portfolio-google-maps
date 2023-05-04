@@ -12,7 +12,7 @@ export const LocationsCityDetails = ({ office }) => {
 
     useEffect(() => {
         getPanorama(office.position)
-    }, [])
+    }, [office.position])
 
     const toggleZoom = () => {
         zoomedIn ? focusBack() : focusArea(DEFAULT_CITY_ZOOM_IN, office.position, false)
@@ -20,9 +20,9 @@ export const LocationsCityDetails = ({ office }) => {
     }
 
     return (
-        <div className="p-8 flex md:flex-col xl:flex-row gap-4 text-primary-dark">
+        <div className="p-8 flex md:flex-col md:items-center xl:flex-row xl:items-start gap-4 text-primary-dark">
             <Image src={office.image} alt={office.city} width={160} height={160} priority className="min-w-[160px]" />
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-col justify-between md:items-center xl:items-start">
                 <div>
                     <div className="text-base leading-snug font-bold">
                         Office in {office.city}, {office.country}
@@ -44,7 +44,7 @@ export const LocationsCityDetails = ({ office }) => {
                         </MotionIconButton>
                     </div>
                 </div>
-                <div>
+                <div className="flex flex-col justify-between md:items-center md:text-center xl:items-start xl:text-start">
                     <div className="text-xs  mb-1">{office.address}</div>
                     <div className="text-xs">{office.phone}</div>
                 </div>
