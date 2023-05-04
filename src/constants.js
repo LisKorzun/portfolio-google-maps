@@ -5,6 +5,15 @@ export const MIN_CONTENT_HEIGHT = 560
 export const CONTENT_HEADING_HEIGHT = 140
 export const ACCORDION_HEADER_HEIGHT = 65
 
+export const COLOURS = {
+    PRIMARY_DARK: '#023047',
+    PRIMARY_LIGHT: '#209EBC',
+    ACCENT_GREEN: '#80C6B5',
+    ACCENT_TEAL: '#76E5CF',
+    ACCENT_SKY: '#8ECAE6',
+    WHITE: '#FFF',
+}
+
 export const AREAS = {
     EUROPE: 'Europe',
     ASIA: 'Asia',

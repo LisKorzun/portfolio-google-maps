@@ -1,23 +1,25 @@
 import { useMemo, useState } from 'react'
-import { groupBy, isEmpty } from 'lodash'
+import groupBy from 'lodash/groupBy'
+import isEmpty from 'lodash/isEmpty'
 import Image from 'next/image'
 
 import Accordion from '@/components/Accordion'
-import { generateContinentsTabs, getZoomByArea, LocationsCountries, useLocationsMap } from '@/components/locations'
+import { generateContinentsTabs, getZoomByArea, LocationsCountries, useMapLocations } from '@/components/locations'
 
 export const LocationsContinents = ({ offices }) => {
     const [activeContinent, setActiveContinent] = useState('')
-    const { renderMarkers, renderClusters } = useLocationsMap()
+    const { showMarkers, showClusters } = useMapLocations()
 
     const officesByContinent = useMemo(() => groupBy(offices, ({ continent }) => continent), [offices])
     const continentsTabs = useMemo(() => generateContinentsTabs(officesByContinent), [officesByContinent])
 
     const onContinentChange = (offices, zoom) => (continent) => {
         setActiveContinent(continent)
+
         if (isEmpty(continent)) {
-            renderClusters(officesByContinent, getZoomByArea())
+            showClusters(officesByContinent, getZoomByArea())
         } else {
-            renderMarkers(offices, zoom, false)
+            showMarkers(offices, zoom)
         }
     }
 

@@ -1,30 +1,22 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
-import { useLocationsMap } from '@/components/locations'
-import { ZoomInIcon, ZoomOutIcon } from '@/components/icons'
-import { smoothTransition } from '@/animations'
+import { DEFAULT_CITY_ZOOM_IN, useMapLocations } from '@/components/locations'
+import { InfoIcon, PanoramaIcon, ZoomInIcon, ZoomOutIcon } from '@/components/icons'
+import { MotionIconButton } from '@/components/common'
 
 export const LocationsCityDetails = ({ office }) => {
-    const [panoramaShown, setPanoramaShown] = useState(false)
     const [zoomedIn, setZoomedIn] = useState(false)
-    const { renderPanorama, zoomIn, zoomOutBack } = useLocationsMap()
+    const { getPanorama, focusArea, focusBack, infoShown, toggleInfo, panoramaAvailable, panoramaShown, togglePanorama } =
+        useMapLocations()
 
-    const togglePanorama = () => {
-        setPanoramaShown((current) => {
-            renderPanorama(office.position, !current)
-            return !current
-        })
-    }
+    useEffect(() => {
+        getPanorama(office.position)
+    }, [])
 
-    const toggleZoomIn = () => {
+    const toggleZoom = () => {
         setZoomedIn((current) => {
-            if (current) {
-                zoomOutBack()
-            } else {
-                zoomIn(office.position, 16)
-            }
+            current ? focusBack() : focusArea(DEFAULT_CITY_ZOOM_IN, office.position, false)
             return !current
         })
     }
@@ -38,27 +30,20 @@ export const LocationsCityDetails = ({ office }) => {
                         Office in {office.city}, {office.country}
                     </div>
 
-                    <div className="flex gap-2 my-5">
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            transition={smoothTransition}
-                            className="text-white bg-primary-dark py-2 px-4 border-none outline-none"
-                            onClick={toggleZoomIn}
-                        >
+                    <div className="flex my-5 gap-2">
+                        <MotionIconButton onClick={toggleZoom} activated={zoomedIn}>
                             {zoomedIn ? (
-                                <ZoomOutIcon className="w-6 h-6 shrink-0" key="zoom-out" />
+                                <ZoomOutIcon className="w-6 h-6 shrink-0" key="zoom-out" whileHover={{ scale: 1.15 }} />
                             ) : (
-                                <ZoomInIcon className="w-6 h-6 shrink-0" key="zoom-in" />
+                                <ZoomInIcon className="w-6 h-6 shrink-0" key="zoom-in" whileHover={{ scale: 1.15 }} />
                             )}
-                        </motion.button>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            transition={smoothTransition}
-                            className="text-white bg-primary-dark py-2 px-4 border-none outline-none text-xs"
-                            onClick={togglePanorama}
-                        >
-                            {panoramaShown ? 'Hide' : 'Show'} panorama
-                        </motion.button>
+                        </MotionIconButton>
+                        <MotionIconButton onClick={togglePanorama} activated={panoramaShown} disabled={!panoramaAvailable}>
+                            <PanoramaIcon className="w-6 h-6 shrink-0 " key="panorama" whileHover={{ scale: 1.15 }} />
+                        </MotionIconButton>
+                        <MotionIconButton onClick={() => toggleInfo(office)} activated={infoShown}>
+                            <InfoIcon className="w-6 h-6 shrink-0 " key="info" whileHover={{ scale: 1.15 }} />
+                        </MotionIconButton>
                     </div>
                 </div>
                 <div>

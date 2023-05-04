@@ -4,6 +4,7 @@ export const DEFAULT_ZOOM = 2.25
 export const DEFAULT_CONTINENT_ZOOM = 4
 export const DEFAULT_COUNTRY_ZOOM = 6
 export const DEFAULT_CITY_ZOOM = 12
+export const DEFAULT_CITY_ZOOM_IN = 16
 
 export const DEFAULT_CENTER = { lat: 11.14695916085034, lng: -26.441557748896827 }
 export const DEFAULT_MAP_OPTIONS = {
@@ -19,7 +20,7 @@ export const DEFAULT_MAP_OPTIONS = {
     styles: darkMapStyles,
 }
 
-export const PANORAMA_OPTIONS = {
+export const PANORAMA_VIEW_OPTIONS = {
     addressControl: false,
     zoomControlOptions: { position: 3 },
     enableCloseButton: false,
