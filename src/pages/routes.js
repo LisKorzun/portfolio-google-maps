@@ -5,9 +5,10 @@ import { motion } from 'framer-motion'
 
 import Accordion from '@/components/Accordion'
 import { BetweenMap, DefaultMap, NearestMap, NearestProvider } from '@/components/routes'
+import { ContentWrapper, MapLoadWrapper } from '@/components/wrappers'
 import { ROUTES_TABS, ROUTES_TABS_IDS } from '@/components/routes/constants'
 import { smoothTransition } from '@/animations'
-import { ContentWrapper, MapLoadWrapper } from '@/components/wrappers'
+import { COLOURS } from '@/constants'
 
 export default function Routes() {
     const [activeTab, setActiveTab] = useState('')

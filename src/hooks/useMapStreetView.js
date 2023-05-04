@@ -25,7 +25,6 @@ export const useMapStreetView = (map) => {
 
     const getPanorama = useCallback(
         (position) => {
-            console.log('Get panorama called', position)
             const options = {
                 location: position,
                 preference: window.google.maps.StreetViewPreference.BEST,
