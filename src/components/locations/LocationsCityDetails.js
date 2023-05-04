@@ -12,7 +12,7 @@ export const LocationsCityDetails = ({ office }) => {
 
     useEffect(() => {
         getPanorama(office.position)
-    }, [office.position])
+    }, [getPanorama, office.position])
 
     const toggleZoom = () => {
         zoomedIn ? focusBack() : focusArea(DEFAULT_CITY_ZOOM_IN, office.position, false)

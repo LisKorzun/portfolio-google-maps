@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import isEmpty from 'lodash/isEmpty'
 
 import { PANORAMA_VIEW_OPTIONS } from '@/components/locations'
@@ -23,23 +23,27 @@ export const useMapStreetView = (map) => {
         }
     }, [map])
 
-    const getPanorama = (position) => {
-        const options = {
-            location: position,
-            preference: window.google.maps.StreetViewPreference.BEST,
-            radius: 80,
-        }
-        setPanoramaAvailable(false)
-        streetViewService
-            .getPanorama(options, (data, status) => {
-                if (status === 'OK') {
-                    panorama.setPano(data.location.pano)
-                    panorama.setPov({ heading: 270, pitch: 0 })
-                    setPanoramaAvailable(true)
-                }
-            })
-            .catch(() => {})
-    }
+    const getPanorama = useCallback(
+        (position) => {
+            console.log('Get panorama called', position)
+            const options = {
+                location: position,
+                preference: window.google.maps.StreetViewPreference.BEST,
+                radius: 80,
+            }
+            setPanoramaAvailable(false)
+            streetViewService
+                .getPanorama(options, (data, status) => {
+                    if (status === 'OK') {
+                        panorama.setPano(data.location.pano)
+                        panorama.setPov({ heading: 270, pitch: 0 })
+                        setPanoramaAvailable(true)
+                    }
+                })
+                .catch(() => {})
+        },
+        [streetViewService, panorama, setPanoramaAvailable]
+    )
 
     const togglePanorama = () => {
         setPanoramaShown((current) => {
