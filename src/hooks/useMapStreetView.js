@@ -24,12 +24,13 @@ export const useMapStreetView = (map) => {
     }, [map])
 
     const getPanorama = useCallback(
-        (position) => {
+        (location, radius = 50) => {
             const options = {
-                location: position,
+                radius,
+                location,
                 preference: window.google.maps.StreetViewPreference.BEST,
-                radius: 80,
             }
+            console.log(radius)
             setPanoramaAvailable(false)
             streetViewService
                 .getPanorama(options, (data, status) => {

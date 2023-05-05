@@ -252,6 +252,7 @@ const offices = [
         address: 'ul. Naturalistov 3, Minsk 220012',
         phone: '+375 29 193 30 43',
         image: '/img/EU-Minsk.webp',
+        streetVewRadius: 80,
     },
     {
         position: { lat: 55.2023543772703, lng: 30.210265205554702 },
