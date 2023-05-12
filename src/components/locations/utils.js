@@ -1,6 +1,8 @@
 import { DEFAULT_CONTINENT_ZOOM, DEFAULT_ZOOM } from '@/components/locations/constants'
 import { AREAS } from '@/constants'
-import { groupBy, keys, map } from 'lodash'
+import groupBy from 'lodash/groupBy'
+import keys from 'lodash/keys'
+import map from 'lodash/map'
 
 export const getZoomByArea = (area, defaultZoom = DEFAULT_ZOOM) => {
     let zoom = defaultZoom

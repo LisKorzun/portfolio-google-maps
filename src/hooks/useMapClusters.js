@@ -4,10 +4,10 @@ import { MarkerClusterer, SuperClusterAlgorithm } from '@googlemaps/markercluste
 
 import { MARKER_IMAGE } from '@/constants'
 
-export const useMapClusters = (map) => {
+export const useMapClusters = () => {
     const [clusters, setClusters] = useState([])
 
-    const renderClusters = (officesByContinent, onMarkerClick) => {
+    const renderClusters = (map, officesByContinent, onMarkerClick) => {
         if (!map) return
 
         const initialBounds = new google.maps.LatLngBounds()
@@ -19,9 +19,11 @@ export const useMapClusters = (map) => {
                     icon: MARKER_IMAGE,
                 })
                 initialBounds.extend(office.position)
-                marker.addListener('click', () => {
-                    onMarkerClick(office)
-                })
+                if (typeof onMarkerClick === 'function') {
+                    marker.addListener('click', () => {
+                        onMarkerClick(office)
+                    })
+                }
                 return marker
             })
             // Create Cluster for every continent

@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
 import isEmpty from 'lodash/isEmpty'
-
 import { PANORAMA_VIEW_OPTIONS } from '@/components/locations'
 
 export const useMapStreetView = (map) => {
@@ -30,7 +29,6 @@ export const useMapStreetView = (map) => {
                 location,
                 preference: window.google.maps.StreetViewPreference.BEST,
             }
-            console.log(radius)
             setPanoramaAvailable(false)
             streetViewService
                 .getPanorama(options, (data, status) => {

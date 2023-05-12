@@ -1,4 +1,4 @@
-import { template } from 'lodash'
+import template from 'lodash/template'
 
 const complexOfficeInfo = `
 <div class="flex">

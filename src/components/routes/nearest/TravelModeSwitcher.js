@@ -1,20 +1,13 @@
 import { motion } from 'framer-motion'
-import { useNearestContext } from '@/components/routes/NearestContext'
-import { BicycleIcon, BusIcon, CarIcon, LocationMarkerIcon, PersonWalkingIcon } from '@/components/icons'
-import { TRAVEL_MODES } from '@/components/routes/constants'
+import { useMapNearestRoute } from '@/components/routes/nearest'
+import { LocationMarkerIcon } from '@/components/icons'
+import { TRAVEL_MODES_ICONS } from '@/components/routes'
 import { smoothTransition } from '@/animations'
 import { COLOURS } from '@/constants'
 
-const iconsMap = {
-    [TRAVEL_MODES.DRIVING]: CarIcon,
-    [TRAVEL_MODES.WALKING]: PersonWalkingIcon,
-    [TRAVEL_MODES.TRANSIT]: BusIcon,
-    [TRAVEL_MODES.BICYCLING]: BicycleIcon,
-}
-
 export const TravelModeSwitcher = () => {
-    const { travelMode, currentRoute, availableRoutes, changeTravelMode, panelIsShown, setPanelIsShown } = useNearestContext()
-    const CurrentModeIcon = iconsMap[travelMode]
+    const { travelMode, route, availableRoutes, changeTravelMode, routeDetailsIsShown, toggleRoteDetails } = useMapNearestRoute()
+    const CurrentModeIcon = TRAVEL_MODES_ICONS[travelMode]
 
     return (
         <div className="h-full w-full flex flex-col justify-between">
@@ -30,7 +23,7 @@ export const TravelModeSwitcher = () => {
                     </motion.div>
                     <div className="leading-tight text-left">
                         <div className="text-[10px]">From:</div>
-                        <div>{currentRoute.startAddress}</div>
+                        <div>{route.startAddress}</div>
                     </div>
                 </div>
                 <div className="flex gap-2 overflow-hidden items-center relative min-h-[100px]">
@@ -53,17 +46,17 @@ export const TravelModeSwitcher = () => {
                         transition={{ ...smoothTransition, delay: 0.1 }}
                     >
                         <div className="text-left py-2 px-4 border border-slate-200 text-primary-dark bg-white">
-                            <div className="font-medium">{currentRoute.duration}</div>
-                            <div>{currentRoute.distance}</div>
+                            <div className="font-medium">{route.duration}</div>
+                            <div>{route.distance}</div>
                         </div>
                         <motion.button
                             type="button"
                             whileHover={{ scale: 1.08 }}
                             transition={smoothTransition}
                             className="text-white bg-primary-dark py-2 px-4 border-none outline-none"
-                            onClick={() => setPanelIsShown(!panelIsShown)}
+                            onClick={toggleRoteDetails}
                         >
-                            {panelIsShown ? 'Hide' : 'Show'} details
+                            {routeDetailsIsShown ? 'Hide' : 'Show'} details
                         </motion.button>
                     </motion.div>
                 </div>
@@ -71,7 +64,7 @@ export const TravelModeSwitcher = () => {
                     <LocationMarkerIcon className="w-8 h-8" />
                     <div className="leading-tight text-left">
                         <div className="text-[10px]">To:</div>
-                        <div>{currentRoute.endAddress}</div>
+                        <div>{route.endAddress}</div>
                     </div>
                 </div>
             </div>
@@ -82,22 +75,22 @@ export const TravelModeSwitcher = () => {
                 animate={{ y: 0 }}
                 transition={{ ...smoothTransition, delay: 0.4 }}
             >
-                {Object.values(availableRoutes).map((route) => {
-                    if (route.mode === currentRoute.mode) return
-                    const Icon = iconsMap[route.mode]
+                {Object.values(availableRoutes).map((alternativeRoute) => {
+                    if (alternativeRoute.mode === route.mode) return
+                    const Icon = TRAVEL_MODES_ICONS[alternativeRoute.mode]
                     return (
                         <motion.div
-                            key={route.mode}
+                            key={alternativeRoute.mode}
                             className="flex gap-2 py-2 px-4 border border-slate-200 items-center cursor-pointer min-w-fit min-h-fit"
                             whileHover={{ backgroundColor: COLOURS.GRAY_200 }}
                             initial={{ backgroundColor: COLOURS.WHITE }}
                             transition={smoothTransition}
-                            onClick={() => changeTravelMode(route.mode)}
+                            onClick={() => changeTravelMode(alternativeRoute.mode)}
                         >
                             <Icon className="w-6 h-6" />
                             <div className="text-[10px] leading-tight text-left">
-                                <div className="font-medium">{route.duration}</div>
-                                <div>{route.distance}</div>
+                                <div className="font-medium">{alternativeRoute.duration}</div>
+                                <div>{alternativeRoute.distance}</div>
                             </div>
                         </motion.div>
                     )

@@ -1,5 +1,7 @@
 import { createContext, useCallback, useContext, useState } from 'react'
-import { useMapMarkers, useMapClusters, useMapZoom, useMapInfoWindow, useMapStreetView } from '@/hooks'
+
+import { useMapClusters, useMapInfoWindow, useMapMarkers, useMapStreetView, useMapZoom } from '@/hooks'
+import { DEFAULT_ZOOM } from '@/components/locations/constants'
 
 export const MapLocationsContext = createContext({})
 
@@ -9,14 +11,16 @@ export const MapLocationsProvider = ({ children }) => {
     const [map, setMap] = useState()
     const [mapReady, setMapReady] = useState(false)
 
-    const { renderMarkers, cleanMarkers } = useMapMarkers(map)
-    const { renderClusters, cleanClusters } = useMapClusters(map)
+    const { renderMarkers, cleanMarkers } = useMapMarkers()
+    const { renderClusters, cleanClusters } = useMapClusters()
     const { focusArea, focusBack } = useMapZoom(map)
     const { showInfo, toggleInfo, infoShown } = useMapInfoWindow(map)
     const { panoramaAvailable, panoramaShown, getPanorama, togglePanorama, closePanorama } = useMapStreetView(map)
 
-    const initMap = useCallback((ref, options) => {
-        setMap(new window.google.maps.Map(ref, options))
+    const initMap = useCallback((ref, options, clusters) => {
+        const mapInstance = new window.google.maps.Map(ref, options)
+        renderClusters(mapInstance, clusters)
+        setMap(mapInstance)
         setMapReady(true)
     }, [])
 
@@ -28,12 +32,12 @@ export const MapLocationsProvider = ({ children }) => {
 
     const showMarkers = (data, zoom, animate = false) => {
         cleanMap()
-        const center = renderMarkers(data, showInfo, animate)
+        const center = renderMarkers(map, data, showInfo, animate)
         focusArea(zoom, center)
     }
-    const showClusters = (data, zoom) => {
+    const showClusters = (data, zoom = DEFAULT_ZOOM) => {
         cleanMap()
-        const center = renderClusters(data, showInfo)
+        const center = renderClusters(map, data, showInfo)
         focusArea(zoom, center)
     }
 

@@ -11,20 +11,7 @@ const mapOptions = {
     styles: skyMapStyles,
 }
 
-export const BetweenMap = () => {
-    const mapRef = useRef()
-    const [map, setMap] = useState()
-    const [bounds, setBounds] = useState()
-
-    useEffect(() => {
-        setMap(new window.google.maps.Map(mapRef.current, mapOptions))
-        setBounds(new window.google.maps.LatLngBounds())
-    }, [])
-
-    return <motion.div ref={mapRef} id="between-map" className="w-full h-full" />
-}
-
-export const DefaultMap = () => {
+export const RoutesDefaultMap = () => {
     const mapRef = useRef()
     const [map, setMap] = useState()
     const [bounds, setBounds] = useState()

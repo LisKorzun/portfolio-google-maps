@@ -1,20 +1,22 @@
 import { LocationsContinents, LocationsMap, MapLocationsProvider } from '@/components/locations'
-import { ContentWrapper, MapLoadWrapper } from '@/components/wrappers'
+import { MainContentContainer, MapContainer, SidebarContainer } from '@/components/containers'
+import { MapLoadWrapper } from '@/components/wrappers'
+
 import offices from '@/data'
 
 export default function Locations() {
     return (
-        <ContentWrapper>
+        <MainContentContainer>
             <MapLocationsProvider>
-                <div className={`w-full md:w-2/3 h-[560px] md:h-auto mr-4`}>
+                <MapContainer>
                     <MapLoadWrapper>
                         <LocationsMap offices={offices} />
                     </MapLoadWrapper>
-                </div>
-                <div className={`w-full md:w-1/3 h-fit md:h-auto md:h-full pb-8`}>
+                </MapContainer>
+                <SidebarContainer>
                     <LocationsContinents offices={offices} />
-                </div>
+                </SidebarContainer>
             </MapLocationsProvider>
-        </ContentWrapper>
+        </MainContentContainer>
     )
 }

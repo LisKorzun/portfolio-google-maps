@@ -8,24 +8,19 @@ export const useMapInfoWindow = (map) => {
     const [info, setInfo] = useState()
     const [infoShown, setInfoShown] = useState(false)
 
-    const initInfoWindow = (map) => {
-        const infoInstance = new window.google.maps.InfoWindow()
-        setInfo(infoInstance)
+    const onCloseClick = () => setInfoShown(false)
+    const onInfoVisible = () => setInfoShown(true)
 
-        infoInstance.addListener('closeclick', () => {
-            setInfoShown(false)
-        })
-        infoInstance.addListener('visible', () => {
-            setInfoShown(true)
-        })
-        map.addListener('zoom_changed', () => {
-            infoInstance.close()
-            setInfoShown(false)
-        })
-    }
     useEffect(() => {
         if (!isEmpty(map)) {
-            initInfoWindow(map)
+            const infoInstance = new window.google.maps.InfoWindow()
+            setInfo(infoInstance)
+            infoInstance.addListener('closeclick', onCloseClick)
+            infoInstance.addListener('visible', onInfoVisible)
+            map.addListener('zoom_changed', () => {
+                infoInstance.close()
+                setInfoShown(false)
+            })
         }
     }, [map])
 

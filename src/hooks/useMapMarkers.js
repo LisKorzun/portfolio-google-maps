@@ -1,11 +1,11 @@
-import { isEmpty } from 'lodash'
-import { MARKER_IMAGE } from '@/constants'
 import { useState } from 'react'
+import isEmpty from 'lodash/isEmpty'
+import { MARKER_IMAGE } from '@/constants'
 
-export const useMapMarkers = (map) => {
+export const useMapMarkers = () => {
     const [markers, setMarkers] = useState([])
 
-    const renderMarkers = (offices, onMarkerClick, animate = false) => {
+    const renderMarkers = (map, offices, onMarkerClick, animate = false) => {
         if (!map) return
 
         if (!isEmpty(offices)) {

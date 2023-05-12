@@ -49,5 +49,4 @@ export const STATUS = {
 export const ERRORS_MSG = {
     HTML5_GEO: 'To build the route we need to know your current location. Please change your settings and try again.',
     BROWSER: "Looks like your browser doesn't support Geolocation.",
-    NEARBY: 'Something is wrong with near by search. Please try again later.',
 }

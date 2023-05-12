@@ -1,11 +1,10 @@
 import { motion } from 'framer-motion'
 import { STATUS } from '@/constants'
 import { scaleInfinity, smoothTransition } from '@/animations'
-import { useNearestContext } from '@/components/routes/NearestContext'
-import { TravelModeSwitcher } from '@/components/routes'
+import { useMapNearestRoute, TravelModeSwitcher } from '@/components/routes/nearest'
 
-export const NearestTab = ({}) => {
-    const { status, error, buildRoute } = useNearestContext()
+export const NearestRouteContent = () => {
+    const { status, error, buildRoute } = useMapNearestRoute()
 
     return (
         <div className="py-6 px-6 text-slate-600 text-sm flex flex-col justify-center items-center text-center h-full">
