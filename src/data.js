@@ -173,6 +173,15 @@ const offices = [
         image: '/img/EU-Budapest.webp',
     },
     {
+        position: { lat: 41.7105291666037, lng: 44.75528998259013 },
+        continent: AREAS.EUROPE,
+        country: AREAS.GEORGIA,
+        city: 'Tbilisi',
+        address: 'Ilo Mosashvili st., 24 Tbilisi 0162',
+        phone: '+995 (577)247347',
+        image: '/img/A-Tbilisi.webp',
+    },
+    {
         position: { lat: 50.026723206080646, lng: 36.220319755820306 },
         continent: AREAS.EUROPE,
         country: AREAS.UKRAINE,
@@ -262,15 +271,6 @@ const offices = [
         address: 'ul. Kommunisticheskaya 16, Vitebsk 210026',
         phone: '+375 21 248 63 42',
         image: '/img/EU-Vitebsk.webp',
-    },
-    {
-        position: { lat: 41.7105291666037, lng: 44.75528998259013 },
-        continent: AREAS.ASIA,
-        country: AREAS.GEORGIA,
-        city: 'Tbilisi',
-        address: 'Ilo Mosashvili st., 24 Tbilisi 0162',
-        phone: '+995 (577)247347',
-        image: '/img/A-Tbilisi.webp',
     },
     {
         position: { lat: 41.348767386900185, lng: 69.3493276386204 },
